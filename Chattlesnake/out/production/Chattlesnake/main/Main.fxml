@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -50,6 +51,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
+                        <CheckMenuItem fx:id="fullscreenMenuItem" mnemonicParsing="false" onAction="#fullscreenMenuItemAction" text="Fullscreen" />
                     <MenuItem mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>

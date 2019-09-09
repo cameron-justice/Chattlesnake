@@ -12,6 +12,8 @@ public class MainController {
     private javafx.scene.layout.Pane primaryPane;
     @FXML
     private javafx.scene.control.MenuItem exitMenuItem;
+    @FXML
+    private javafx.scene.control.MenuItem fullscreenMenuItem;
 
     @FXML
     private void exitMenuItemAction(){
@@ -19,5 +21,18 @@ public class MainController {
         Stage stage = (Stage) primaryPane.getScene().getWindow();
 
         stage.close();
+    }
+
+    @FXML
+    private void fullscreenMenuItemAction(){
+        Stage stage = (Stage) primaryPane.getScene().getWindow();
+
+        if (stage.isFullScreen()) {
+            stage.setFullScreen(false);
+        }
+        else {
+            stage.setFullScreen(true);
+        }
+
     }
 }
