@@ -1,4 +1,4 @@
-package main;
+package chattlesnake;
 
 import javafx.fxml.FXML;
 
