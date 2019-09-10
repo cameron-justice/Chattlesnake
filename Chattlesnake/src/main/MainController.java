@@ -27,12 +27,8 @@ public class MainController {
     private void fullscreenMenuItemAction(){
         Stage stage = (Stage) primaryPane.getScene().getWindow();
 
-        if (stage.isFullScreen()) {
-            stage.setFullScreen(false);
-        }
-        else {
-            stage.setFullScreen(true);
-        }
+        // Switch current setting
+        stage.setFullScreen( !stage.isFullScreen() );
 
     }
 }
