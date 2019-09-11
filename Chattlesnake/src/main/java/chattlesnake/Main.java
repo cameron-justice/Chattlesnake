@@ -13,7 +13,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Main.fxml"));
         primaryStage.setTitle("Chattlesnake");
-        primaryStage.setScene(new Scene(root, 1280, 720));
+        Scene primaryScene = new Scene(root, 1280, 720);
+        primaryStage.setScene(primaryScene);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.show();
     }
