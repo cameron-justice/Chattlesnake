@@ -32,7 +32,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chattlesnake" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Text id="test-text" strokeType="OUTSIDE" strokeWidth="0.0" text="Chattlesnake" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
                   <Font size="24.0" />
                </font>
