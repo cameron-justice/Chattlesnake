@@ -22,6 +22,8 @@ public class Main extends Application {
 
         // This creates a Socket object that is connected to the URL passed
 
+        ChatClientManager client = new ChatClientManager();
+
     }
 
     public static void main(String[] args) {
