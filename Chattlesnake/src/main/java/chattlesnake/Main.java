@@ -19,7 +19,8 @@ public class Main extends Application {
         //primaryStage.show();
 
         /// Testing Area for Socket connection to Webserver
-        ChatClientManager client = new ChatClientManager();
+        ChatClientManager client1 = new ChatClientManager("Good Message");
+        ChatClientManager client2 = new ChatClientManager("");
 
     }
 
