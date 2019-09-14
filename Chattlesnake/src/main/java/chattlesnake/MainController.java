@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.event.ActionEvent;
 
 public class MainController {
 
@@ -14,6 +15,8 @@ public class MainController {
     private javafx.scene.control.MenuItem exitMenuItem;
     @FXML
     private javafx.scene.control.MenuItem fullscreenMenuItem;
+    @FXML
+    private javafx.event.ActionEvent sendMessage;
 
     @FXML
     private void exitMenuItemAction(){
@@ -31,4 +34,14 @@ public class MainController {
         stage.setFullScreen( !stage.isFullScreen() );
 
     }
+
+
+    @FXML
+    private void sendMessage(ActionEvent event){
+        System.out.println("Hello World");
+    }
 }
+
+
+
+

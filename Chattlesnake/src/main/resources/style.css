@@ -1,3 +1,4 @@
-#test-text {
-    -fx-font-size: 50px;
+AnchorPane {
+    -fx-border-color: black;
+    -fx-border-size: 3px;
 }
