@@ -4,6 +4,7 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import javafx.scene.control.Alert;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,8 +55,8 @@ public class ChatClientManager {
 
     // Transmits the client_id to the server to get all the groups the user is in
     // @Param: client_id; the id of the client user
-    public List getGroups(int client_id){
-
+    public void getGroups(int client_id){
+        socket.emit("groups", client_id);
     }
 
     // Sets up event functions and emoitter listeners for Socket.IO
@@ -66,10 +67,6 @@ public class ChatClientManager {
             @Override
             public void call(Object... args) {
                 System.out.println("Conected: " + socket.connected());
-
-                if(msg != ""){
-                    socket.emit("chatMessage", msg);
-                }
             }
         }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() { // This happens when the socket disconnects from the server (or when the server forces disconnection)
             @Override
@@ -87,10 +84,21 @@ public class ChatClientManager {
                     e.printStackTrace();
                 }
             }
-        }).on("groupInfo", new Emitter.Listener() { // This happens when the server sends the information for a group that the user is in
+        }).on("getGroupInfo", new Emitter.Listener() { // This happens when the server sends the information for a group that the user is in
             @Override
             public void call(Object... args) {
+                JSONObject group = (JSONObject) args[0];
 
+            }
+        }).on("getGroups", new Emitter.Listener() { // This happens when the server sends the array of all groups the user is in
+            @Override
+            public void call(Object... args) {
+                JSONArray groups = (JSONArray) args[0];
+                int count = (int) args[1];
+
+                for(int i = 0; i < count; i++){
+                    socket.emit("groupInfo", (int) groups.get(i)); // Request info for the groupId
+                }
             }
         });
     }
