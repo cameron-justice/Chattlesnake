@@ -16,11 +16,7 @@ public class Main extends Application {
         Scene primaryScene = new Scene(root, 1280, 720);
         primaryStage.setScene(primaryScene);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        //primaryStage.show();
-
-        /// Testing Area for Socket connection to Webserver
-        ChatClientManager client1 = new ChatClientManager("Good Message");
-        ChatClientManager client2 = new ChatClientManager("");
+        primaryStage.show();
 
     }
 

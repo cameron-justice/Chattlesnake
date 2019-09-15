@@ -4,12 +4,14 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import javafx.scene.control.Alert;
+import jdk.vm.ci.meta.Local;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.awt.*;
 import java.net.URISyntaxException;
+import java.time.LocalDateTime;
 
 public class ChatClientManager {
 
@@ -76,10 +78,11 @@ public class ChatClientManager {
         }).on("chatMessage", new Emitter.Listener() { // This happens when the server sends a message to the socket
             @Override
             public void call(Object... args) {
-                // TODO: Decode the JSON object and give it to the application to show
                 JSONObject msg = (JSONObject) args[0];
                 try {
                     String senderName = (String) msg.get("creator");
+                    String msgBody = (String) msg.get("message_body");
+                    LocalDateTime createDate = (LocalDateTime) msg.get("create_date"); // TODO: Make sure this doesn't break converting string to LocalDateTime
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

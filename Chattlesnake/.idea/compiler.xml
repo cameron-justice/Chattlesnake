@@ -20,7 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Chattlesnake" target="1.7" />
+      <module name="Chattlesnake" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
