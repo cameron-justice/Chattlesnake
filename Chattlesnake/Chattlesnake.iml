@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -16,7 +16,6 @@
     <orderEntry type="library" name="Maven: io.socket:engine.io-client:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.json:json:20090211" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:12.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:linux:12.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:12.0.2" level="project" />
@@ -25,8 +24,6 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:linux:12.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:12.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:linux:12.0.2" level="project" />
-    <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
-    <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
-    <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20180130" level="project" />
   </component>
 </module>

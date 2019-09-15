@@ -4,6 +4,8 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import javafx.scene.control.Alert;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
@@ -17,7 +19,7 @@ public class ChatClientManager {
         msg = message;
 
         try {
-            socket = IO.socket("http://localhost:3000/");
+            socket = IO.socket("https://chattlesnake-web-server.herokuapp.com/");
             socket.connect();
 
             handleSocketEvents();
@@ -32,6 +34,10 @@ public class ChatClientManager {
 
             alert.showAndWait();
         }
+
+    }
+
+    public void SendMessage(Message msg){
 
     }
 
@@ -57,7 +63,12 @@ public class ChatClientManager {
             @Override
             public void call(Object... args) {
                 // TODO: Decode the JSON object and give it to the application to show
-                System.out.println(args[0]);
+                JSONObject msg = (JSONObject) args[0];
+                try {
+                    String senderName = (String) msg.get("creator");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
