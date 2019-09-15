@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.net.URISyntaxException;
 
 public class ChatClientManager {
@@ -37,7 +38,23 @@ public class ChatClientManager {
 
     }
 
-    public void SendMessage(Message msg){
+    // Transmits a Message object to the server for distribution
+    // @Param: msg; The Message object to be transmitted
+    public void sendMessage(Message msg){
+        // Holds a JSON version of the msg to send to the server
+        JSONObject jsonMsg = new JSONObject();
+
+        jsonMsg.put("client_id", msg.getAuthor_id());
+        jsonMsg.put("recipient_id", msg.getAuthor_id());
+        jsonMsg.put("message_body", msg.getMessage_body());
+        jsonMsg.put("create_date", msg.getCreate_date());
+
+        socket.emit("chatMessage", jsonMsg);
+    }
+
+    // Transmits the client_id to the server to get all the groups the user is in
+    // @Param: client_id; the id of the client user
+    public List getGroups(int client_id){
 
     }
 
@@ -69,6 +86,11 @@ public class ChatClientManager {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+        }).on("groupInfo", new Emitter.Listener() { // This happens when the server sends the information for a group that the user is in
+            @Override
+            public void call(Object... args) {
+
             }
         });
     }
