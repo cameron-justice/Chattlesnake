@@ -4,12 +4,10 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import javafx.scene.control.Alert;
-import jdk.vm.ci.meta.Local;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.awt.*;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,8 +18,7 @@ public class ChatClientManager {
     private String msg;
 
     // Constructor
-    ChatClientManager(String message) throws URISyntaxException {
-        msg = message;
+    ChatClientManager() throws URISyntaxException {
 
         try {
             socket = IO.socket("https://chattlesnake-web-server.herokuapp.com/");
