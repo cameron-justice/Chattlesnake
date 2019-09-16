@@ -8,9 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.awt.*;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class ChatClientManager {
 
@@ -18,8 +18,7 @@ public class ChatClientManager {
     private String msg;
 
     // Constructor
-    ChatClientManager(String message) throws URISyntaxException {
-        msg = message;
+    ChatClientManager() throws URISyntaxException {
 
         try {
             socket = IO.socket("https://chattlesnake-web-server.herokuapp.com/");
@@ -67,7 +66,7 @@ public class ChatClientManager {
         socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() { // This happens when the socket first connects to a server
             @Override
             public void call(Object... args) {
-                System.out.println("Conected: " + socket.connected());
+                System.out.println("Connected: " + socket.connected());
             }
         }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() { // This happens when the socket disconnects from the server (or when the server forces disconnection)
             @Override
@@ -90,6 +89,19 @@ public class ChatClientManager {
             @Override
             public void call(Object... args) {
                 JSONObject group = (JSONObject) args[0];
+                int count = (int) args[1]; // Number of members in the group
+
+                String name = (String) group.get("name");
+                LocalDateTime create_date = (LocalDateTime) group.get("create_date");
+                boolean passwd_required = (boolean) group.get("passwd_required");
+
+                ArrayList<Integer> memberIDs = new ArrayList<Integer>(); // Hold the IDs of the members
+
+                for(int i = 0; i < count; i++){
+                    memberIDs.add((int) group.getJSONArray("members").get(i)); // Get the ID at i
+                }
+
+                memberIDs.forEach((ID) -> socket.emit("getUserInfo", ID)); // Request the info from the server for each member
 
             }
         }).on("getGroups", new Emitter.Listener() { // This happens when the server sends the array of all groups the user is in
@@ -101,6 +113,19 @@ public class ChatClientManager {
                 for(int i = 0; i < count; i++){
                     socket.emit("groupInfo", (int) groups.get(i)); // Request info for the groupId
                 }
+            }
+        }).on("userInfo", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                JSONObject user = (JSONObject) args[0];
+
+                int userID = user.getInt("user_id");
+                String name = user.getString("name");
+                //TODO: User Pictures
+
+
+                //TODO: Transmit to object that sets up userinfo
+
             }
         });
     }
