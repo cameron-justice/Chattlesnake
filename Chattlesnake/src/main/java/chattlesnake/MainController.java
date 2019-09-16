@@ -38,7 +38,7 @@ public class MainController {
 
     @FXML
     private void sendMessage(ActionEvent event){
-        System.out.println("Hello World");
+        System.out.println("Yah Yeet");
     }
 }
 

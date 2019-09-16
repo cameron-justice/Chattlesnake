@@ -59,7 +59,7 @@ public class ChatClientManager {
         socket.emit("groups", client_id);
     }
 
-    // Sets up event functions and emoitter listeners for Socket.IO
+    // Sets up event functions and emitter listeners for Socket.IO
     // Socket.IO works by connecting the socket to a server and creating listeners for events.
     // When an event happens, the listener catches it and calls the "call" function dedicated to it.
     private void handleSocketEvents(){
