@@ -53,8 +53,6 @@ public class ChatClientManager {
         socket.emit("chatMessage", jsonMsg);
     }
 
-    public void
-
     // Transmits the client_id to the server to get all the groups the user is in
     // @Param: client_id; the id of the client user
     public void getGroups(int client_id){
@@ -129,7 +127,7 @@ public class ChatClientManager {
                 //TODO: Transmit to object that sets up userinfo
 
             }
-        })
+        });
     }
 
 }
