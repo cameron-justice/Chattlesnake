@@ -6,6 +6,7 @@ public class Message {
 
     private int author_id;
     private int recipient_id;
+    private int recipient_group_id;
     private String message_body;
     private LocalDateTime create_date;
 
@@ -13,7 +14,7 @@ public class Message {
 
     }
 
-    Message(int author_id, int recipient_id, String message_body, LocalDateTime create_date){
+    Message(int author_id, String message_body, LocalDateTime create_date){
         this.author_id = author_id;
         this.recipient_id = recipient_id;
         this.message_body = message_body;
@@ -50,5 +51,13 @@ public class Message {
 
     public void setCreate_date(LocalDateTime create_date) {
         this.create_date = create_date;
+    }
+
+    public int getRecipient_group_id() {
+        return recipient_group_id;
+    }
+
+    public void setRecipient_group_id(int recipient_group_id) {
+        this.recipient_group_id = recipient_group_id;
     }
 }

@@ -72,6 +72,22 @@ public class Group {
     }
 
     /**
+     * Retrieve the list of members
+     * @return The list of members
+     */
+    public LinkedList<User> getMembers(){
+        return members;
+    }
+
+    /**
+     * Set the list of members
+     * @param members new list of members
+     */
+    public void setMembers(LinkedList<User> members){
+        this.members = members;
+    }
+
+    /**
      * Removes a member from the group
      * @param member_id ID of the member to remove
      */

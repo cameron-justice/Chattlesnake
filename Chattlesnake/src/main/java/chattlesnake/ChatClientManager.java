@@ -16,7 +16,6 @@ import java.util.LinkedList;
 public class ChatClientManager {
 
     private Socket socket;
-    private String msg;
 
     // Constructor
     ChatClientManager() throws URISyntaxException {
@@ -40,6 +39,26 @@ public class ChatClientManager {
 
     }
 
+    public User getInfoOnUser(int user_id){
+        final User[] user = new User[1]; // Java needs this workaround because why not
+
+        socket.emit("userInfo", new Ack() {
+            @Override
+            public void call(Object... args) {
+                JSONObject jsonUser = (JSONObject) args[0];
+
+                int userID = jsonUser.getInt("user_id");
+                String name = jsonUser.getString("name");
+                LocalDateTime create_date = LocalDateTime.parse(jsonUser.getString("create_date"));
+                //TODO: User Pictures?
+
+                user[0] = new User(userID, name, create_date);
+            }
+        });
+
+        return user[0];
+    }
+
     // Transmits a Message object to the server for distribution
     // @Param: msg; The Message object to be transmitted
     public void sendMessage(Message msg){
@@ -61,7 +80,7 @@ public class ChatClientManager {
      * @param client_id the ID of the client user
      */
     public void getGroups(int client_id){
-        socket.emit("groups", client_id);
+        socket.emit("getGroups", client_id);
     }
 
     /**
@@ -151,23 +170,9 @@ public class ChatClientManager {
                     socket.emit("groupInfo", (int) groups.get(i)); // Request info for the groupId
                 }
             }
-        }).on("userInfo", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                JSONObject jsonUser = (JSONObject) args[0];
-
-                int userID = jsonUser.getInt("user_id");
-                String name = jsonUser.getString("name");
-                LocalDateTime create_date = LocalDateTime.parse(jsonUser.getString("create_date"));
-                //TODO: User Pictures
-
-                User user = new User(userID, name, create_date);
-
-
-                //TODO: Transmit to object that sets up userinfo
-
-            }
         });
+
+        //TODO: Convert these to individual socket.on with Emitter.Listener functions for readability
     }
 
 }
