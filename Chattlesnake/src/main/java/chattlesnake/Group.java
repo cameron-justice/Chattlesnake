@@ -8,6 +8,7 @@ import java.util.LinkedList;
  */
 public class Group {
 
+    private int ID;
     private String name;
     private LocalDateTime create_date;
     private LinkedList<User> members; // Holds all members of the group
@@ -21,10 +22,12 @@ public class Group {
 
     /**
      * Partial constructor
+     * @param ID ID of the group
      * @param name Name of the group
      * @param create_date DateTime the group was created
      */
-    Group(String name, LocalDateTime create_date){
+    Group(int ID, String name, LocalDateTime create_date){
+        this.ID = ID;
         this.name = name;
         this.create_date = create_date;
 
@@ -88,5 +91,13 @@ public class Group {
         }
 
         return null;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }
