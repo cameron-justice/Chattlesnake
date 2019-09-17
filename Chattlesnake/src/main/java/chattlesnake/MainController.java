@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 
+import java.time.LocalDateTime;
+
+import static chattlesnake.DisplayManager.*;
+
 public class MainController {
 
     @FXML
@@ -38,7 +42,11 @@ public class MainController {
 
     @FXML
     private void sendMessage(ActionEvent event){
-        System.out.println("Hello World");
+        //System.out.println("Hello World");
+
+        DisplayManager disp = new DisplayManager();
+        Message msg = new Message(6969,420, "Hello there palarooni", LocalDateTime.now());
+        disp.showMessage(msg);
     }
 }
 

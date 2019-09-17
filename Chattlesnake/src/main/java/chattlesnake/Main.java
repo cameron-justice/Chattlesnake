@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
+import java.time.LocalDateTime;
+
 public class Main extends Application {
 
     static ChatClientManager I_CCM;
@@ -20,6 +22,7 @@ public class Main extends Application {
         primaryStage.setScene(primaryScene);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.show();
+
 
     }
 
