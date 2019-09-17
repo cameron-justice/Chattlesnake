@@ -9,7 +9,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    static ChatClientManager I_CCM;
+    // Singleton pattern for managers
+    static public ChatClientManager I_CCM;
+    static public DisplayManager I_DM;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -20,6 +22,10 @@ public class Main extends Application {
         primaryStage.setScene(primaryScene);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.show();
+
+        // Manager Singletons
+        I_CCM = new ChatClientManager();
+        I_DM = new DisplayManager();
 
     }
 

@@ -1,21 +1,47 @@
 package chattlesnake;
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 
+/**
+ * Java Object representation of a chat Group
+ */
 public class Group {
 
     private String name;
     private LocalDateTime create_date;
-    private boolean passwd_required;
+    private LinkedList<User> members; // Holds all members of the group
 
+    /**
+     * Default constructor
+     */
     Group(){
-
+        members = new LinkedList<User>();
     }
 
-    Group(String name, LocalDateTime create_date, boolean passwd_required){
+    /**
+     * Partial constructor
+     * @param name Name of the group
+     * @param create_date DateTime the group was created
+     */
+    Group(String name, LocalDateTime create_date){
         this.name = name;
         this.create_date = create_date;
-        this.passwd_required = passwd_required;
+
+        members = new LinkedList<User>();
+    }
+
+    /**
+     * Full constructor
+     * @param name Name of the group
+     * @param create_date DateTime the group was created
+     * @param members List of members in the group
+     */
+    Group(String name, LocalDateTime create_date, LinkedList<User> members){
+        this.name = name;
+        this.create_date = create_date;
+
+        this.members = members;
     }
 
     public String getName() {
@@ -34,11 +60,33 @@ public class Group {
         this.create_date = create_date;
     }
 
-    public boolean isPasswd_required() {
-        return passwd_required;
+    /**
+     * Adds a member to the group
+     * @param member User object to add
+     */
+    public void addMember(User member){
+        members.add(member);
     }
 
-    public void setPasswd_required(boolean passwd_required) {
-        this.passwd_required = passwd_required;
+    /**
+     * Removes a member from the group
+     * @param member_id ID of the member to remove
+     */
+    public void removeMember(int member_id){
+        members.removeIf(user -> user.getID() == member_id);
+    }
+
+    /**
+     * Gets the member with the matching ID
+     * @param member_id the ID to look for
+     * @return member with matching ID; null if member does not exist in group
+     */
+    public User getMember(int member_id){
+        for(int i = 0; i < members.size(); i++){
+            if(members.get(i).getID() == member_id)
+                return members.get(i);
+        }
+
+        return null;
     }
 }

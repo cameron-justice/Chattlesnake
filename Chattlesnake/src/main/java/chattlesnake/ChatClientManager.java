@@ -53,8 +53,10 @@ public class ChatClientManager {
         socket.emit("chatMessage", jsonMsg);
     }
 
-    // Transmits the client_id to the server to get all the groups the user is in
-    // @Param: client_id; the id of the client user
+    /**
+     * Transmits the client_id to the server to get all groups the user is in
+     * @param client_id the ID of the client user
+     */
     public void getGroups(int client_id){
         socket.emit("groups", client_id);
     }
@@ -76,11 +78,21 @@ public class ChatClientManager {
         }).on("chatMessage", new Emitter.Listener() { // This happens when the server sends a message to the socket
             @Override
             public void call(Object... args) {
-                JSONObject msg = (JSONObject) args[0];
+                JSONObject jsonMsg = (JSONObject) args[0];
                 try {
-                    String senderName = (String) msg.get("creator");
-                    String msgBody = (String) msg.get("message_body");
-                    LocalDateTime createDate = (LocalDateTime) msg.get("create_date"); // TODO: Make sure this doesn't break converting string to LocalDateTime
+                    int senderId = jsonMsg.getInt("creator");
+                    String msgBody = jsonMsg.getString("message_body");
+                    LocalDateTime createDate =  LocalDateTime.parse(jsonMsg.getString("create_date")); // TODO: Make sure this doesn't break converting string to LocalDateTime
+
+                    // Make the message object
+                    Message msg = new Message();
+                    msg.setAuthor_id(senderId);
+                    msg.setCreate_date(createDate);
+                    msg.setMessage_body(msgBody);
+
+                    // Send message for display
+                    Main.I_DM.showMessage(msg);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
