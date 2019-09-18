@@ -39,6 +39,35 @@ public class ChatClientManager {
 
     }
 
+    /**
+     * Sends login information to the server. Encryption is handled there.
+     * @param username The username of the user
+     * @param password The plaintext password of the user
+     */
+    public User login(String username, String password){
+        final User[] user = new User[1]; // Java needs this workaround because why not
+
+        socket.emit("login", username, password, new Ack() {
+            @Override
+            public void call(Object... args) {
+                JSONObject jsonUser = (JSONObject) args[0];
+
+                int userID = jsonUser.getInt("user_id");
+                String name = jsonUser.getString("name");
+                LocalDateTime create_date = LocalDateTime.parse(jsonUser.getString("create_date"));
+                //TODO: User Pictures?
+
+                user[0] = new User(userID, name, create_date);
+            }
+        });
+
+        return user[0];
+    }
+
+    public void newUser(String username, String password){
+
+    }
+
     public User getInfoOnUser(int user_id){
         final User[] user = new User[1]; // Java needs this workaround because why not
 
