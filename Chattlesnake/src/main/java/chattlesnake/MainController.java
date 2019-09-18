@@ -2,16 +2,20 @@ package chattlesnake;
 
 import javafx.fxml.FXML;
 
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.util.Callback;
 
+import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ResourceBundle;
 
 import static chattlesnake.DisplayManager.*;
 
-public class MainController {
+public class MainController implements Initializable {
 
     @FXML
     private javafx.scene.layout.Pane primaryPane;
@@ -21,6 +25,9 @@ public class MainController {
     private javafx.scene.control.MenuItem fullscreenMenuItem;
     @FXML
     private javafx.event.ActionEvent sendMessage;
+    @FXML
+    public TextArea messageDisplayArea;
+
 
     @FXML
     private void exitMenuItemAction(){
@@ -44,9 +51,19 @@ public class MainController {
     private void sendMessage(ActionEvent event){
         //System.out.println("Hello World");
 
-        DisplayManager disp = new DisplayManager();
-        Message msg = new Message(6969,420, "Hello there palarooni", LocalDateTime.now());
-        disp.showMessage(msg);
+        //DisplayManager disp = new DisplayManager();
+        Message msg = new Message(6969,420, "Hello there bro palarooni", LocalDateTime.now());
+        //disp.showMessage(msg);
+
+        DisplayManager displayManager = new DisplayManager(this);
+        displayManager.showMessage(msg);
+
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Nothing
     }
 }
 

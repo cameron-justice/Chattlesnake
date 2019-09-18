@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
+
 import java.time.LocalDateTime;
 
 public class Main extends Application {
@@ -15,8 +16,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Main.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("Main.fxml"));
+
+        Parent root = (Parent)loader.load();
         primaryStage.setTitle("Chattlesnake");
+        //DisplayManager displayManager = new DisplayManager(loader.getController());
         Scene primaryScene = new Scene(root, 1280, 720);
         primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
         primaryStage.setScene(primaryScene);

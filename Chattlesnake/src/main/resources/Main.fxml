@@ -36,7 +36,7 @@
             <Insets left="20.0" top="10.0" />
          </padding>
       </HBox>
-      <ListView layoutX="279.0" layoutY="48.0" prefHeight="306.0" prefWidth="471.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0" />
+      <TextArea fx:id="messageDisplayArea" editable="false" focusTraversable="false" layoutX="280.0" layoutY="48.0" prefHeight="306.0" prefWidth="387.0" promptText="hello" wrapText="true" />
       <TextArea layoutX="279.0" layoutY="373.0" prefHeight="54.0" prefWidth="471.0" promptText="Write a message..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="0.0" />
       <Button layoutX="553.0" layoutY="373.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="54.0" prefWidth="51.0" style="-fx-background-color: #fb8c00;" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
