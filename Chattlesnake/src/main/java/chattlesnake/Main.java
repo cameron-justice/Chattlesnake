@@ -7,12 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
-
-import java.time.LocalDateTime;
-
 public class Main extends Application {
 
-    static ChatClientManager I_CCM;
+    // Singleton pattern for managers
+    static public ChatClientManager I_CCM;
+    static public DisplayManager I_DM;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -20,14 +19,16 @@ public class Main extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("Main.fxml"));
 
         Parent root = (Parent)loader.load();
-        primaryStage.setTitle("Chattlesnake");
-        //DisplayManager displayManager = new DisplayManager(loader.getController());
+        primaryStage.setTitle("ChattleSnake");
         Scene primaryScene = new Scene(root, 1280, 720);
         primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
         primaryStage.setScene(primaryScene);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.show();
 
+        // Manager Singletons
+        I_CCM = new ChatClientManager();
+        I_DM = new DisplayManager(loader.getController());
 
     }
 

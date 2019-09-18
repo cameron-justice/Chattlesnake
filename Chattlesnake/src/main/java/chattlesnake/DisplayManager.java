@@ -47,7 +47,7 @@ public class DisplayManager {
 
 
         controller.messageDisplayArea.appendText(Integer.toString(author_id) + ": ");
-        controller.messageDisplayArea.appendText(message);
+        controller.messageDisplayArea.appendText(message + "\n");
     }
 
     public void showGroup(Group group) {

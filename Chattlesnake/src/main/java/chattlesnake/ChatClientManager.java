@@ -1,5 +1,6 @@
 package chattlesnake;
 
+import io.socket.client.Ack;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
@@ -10,12 +11,11 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ChatClientManager {
 
     private Socket socket;
-    private String msg;
 
     // Constructor
     ChatClientManager() throws URISyntaxException {
@@ -39,6 +39,55 @@ public class ChatClientManager {
 
     }
 
+    /**
+     * Sends login information to the server. Encryption is handled there.
+     * @param username The username of the user
+     * @param password The plaintext password of the user
+     */
+    public User login(String username, String password){
+        final User[] user = new User[1]; // Java needs this workaround because why not
+
+        socket.emit("login", username, password, new Ack() {
+            @Override
+            public void call(Object... args) {
+                JSONObject jsonUser = (JSONObject) args[0];
+
+                int userID = jsonUser.getInt("user_id");
+                String name = jsonUser.getString("name");
+                LocalDateTime create_date = LocalDateTime.parse(jsonUser.getString("create_date"));
+                //TODO: User Pictures?
+
+                user[0] = new User(userID, name, create_date);
+            }
+        });
+
+        return user[0];
+    }
+
+    public void newUser(String username, String password){
+
+    }
+
+    public User getInfoOnUser(int user_id){
+        final User[] user = new User[1]; // Java needs this workaround because why not
+
+        socket.emit("userInfo", new Ack() {
+            @Override
+            public void call(Object... args) {
+                JSONObject jsonUser = (JSONObject) args[0];
+
+                int userID = jsonUser.getInt("user_id");
+                String name = jsonUser.getString("name");
+                LocalDateTime create_date = LocalDateTime.parse(jsonUser.getString("create_date"));
+                //TODO: User Pictures?
+
+                user[0] = new User(userID, name, create_date);
+            }
+        });
+
+        return user[0];
+    }
+
     // Transmits a Message object to the server for distribution
     // @Param: msg; The Message object to be transmitted
     public void sendMessage(Message msg){
@@ -51,15 +100,26 @@ public class ChatClientManager {
         jsonMsg.put("create_date", msg.getCreate_date());
 
         socket.emit("chatMessage", jsonMsg);
+
+        //TODO: Send to LogManager
     }
 
-    // Transmits the client_id to the server to get all the groups the user is in
-    // @Param: client_id; the id of the client user
+    /**
+     * Transmits the client_id to the server to get all groups the user is in
+     * @param client_id the ID of the client user
+     */
     public void getGroups(int client_id){
-        socket.emit("groups", client_id);
+        socket.emit("getGroups", client_id);
     }
 
-    // Sets up event functions and emoitter listeners for Socket.IO
+    /**
+     * Disconnects the socket from the server
+     */
+    public void disconnect(){
+        socket.disconnect();
+    }
+
+    // Sets up event functions and emitter listeners for Socket.IO
     // Socket.IO works by connecting the socket to a server and creating listeners for events.
     // When an event happens, the listener catches it and calls the "call" function dedicated to it.
     private void handleSocketEvents(){
@@ -76,11 +136,22 @@ public class ChatClientManager {
         }).on("chatMessage", new Emitter.Listener() { // This happens when the server sends a message to the socket
             @Override
             public void call(Object... args) {
-                JSONObject msg = (JSONObject) args[0];
+                JSONObject jsonMsg = (JSONObject) args[0];
                 try {
-                    String senderName = (String) msg.get("creator");
-                    String msgBody = (String) msg.get("message_body");
-                    LocalDateTime createDate = (LocalDateTime) msg.get("create_date"); // TODO: Make sure this doesn't break converting string to LocalDateTime
+                    int senderId = jsonMsg.getInt("creator");
+                    String msgBody = jsonMsg.getString("message_body");
+                    LocalDateTime createDate =  LocalDateTime.parse(jsonMsg.getString("create_date")); // TODO: Make sure this doesn't break converting string to LocalDateTime
+
+                    // Make the message object
+                    Message msg = new Message();
+                    msg.setAuthor_id(senderId);
+                    msg.setCreate_date(createDate);
+                    msg.setMessage_body(msgBody);
+
+                    // Send message for display
+                    Main.I_DM.showMessage(msg);
+                    //TODO: Send to LogManager
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -88,20 +159,34 @@ public class ChatClientManager {
         }).on("getGroupInfo", new Emitter.Listener() { // This happens when the server sends the information for a group that the user is in
             @Override
             public void call(Object... args) {
-                JSONObject group = (JSONObject) args[0];
+                JSONObject jsonGroup = (JSONObject) args[0];
                 int count = (int) args[1]; // Number of members in the group
 
-                String name = (String) group.get("name");
-                LocalDateTime create_date = (LocalDateTime) group.get("create_date");
-                boolean passwd_required = (boolean) group.get("passwd_required");
+                int ID = jsonGroup.getInt("ID");
+                String name = (String) jsonGroup.get("name");
+                LocalDateTime create_date = LocalDateTime.parse(jsonGroup.getString("create_date"));
 
-                ArrayList<Integer> memberIDs = new ArrayList<Integer>(); // Hold the IDs of the members
+                LinkedList<Integer> memberIDs = new LinkedList<Integer>(); // Hold the IDs of the members
 
+                // Get IDs from the JSONObject
                 for(int i = 0; i < count; i++){
-                    memberIDs.add((int) group.getJSONArray("members").get(i)); // Get the ID at i
+                    memberIDs.add((int) jsonGroup.getJSONArray("members").get(i)); // Get the ID at i
                 }
 
-                memberIDs.forEach((ID) -> socket.emit("getUserInfo", ID)); // Request the info from the server for each member
+                Group group = new Group(ID, name, create_date);
+
+                // Get the server to send the user info for each ID in the group
+                memberIDs.forEach(mid -> socket.emit("userInfo", new Ack() {
+                    @Override
+                    public void call(Object... args) {
+                        JSONObject jsonUser = (JSONObject) args[0];
+
+                        User user = new User(jsonUser.getInt("ID"), jsonUser.getString("name"), LocalDateTime.parse(jsonUser.getString("create_date")));
+                        group.addMember(user);
+                    }
+                }));
+
+                Main.I_DM.showGroup(group);
 
             }
         }).on("getGroups", new Emitter.Listener() { // This happens when the server sends the array of all groups the user is in
@@ -114,20 +199,9 @@ public class ChatClientManager {
                     socket.emit("groupInfo", (int) groups.get(i)); // Request info for the groupId
                 }
             }
-        }).on("userInfo", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                JSONObject user = (JSONObject) args[0];
-
-                int userID = user.getInt("user_id");
-                String name = user.getString("name");
-                //TODO: User Pictures
-
-
-                //TODO: Transmit to object that sets up userinfo
-
-            }
         });
+
+        //TODO: Convert these to individual socket.on with Emitter.Listener functions for readability
     }
 
 }
