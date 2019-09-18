@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 
+import java.net.URISyntaxException;
+import java.time.LocalDateTime;
+
 public class MainController {
 
     @FXML
@@ -17,30 +20,52 @@ public class MainController {
     private javafx.scene.control.MenuItem fullscreenMenuItem;
     @FXML
     private javafx.event.ActionEvent sendMessage;
+    @FXML
+    private javafx.event.ActionEvent setLogin;
+    @FXML
+    private javafx.event.ActionEvent createAccount;
+    @FXML
+    private javafx.scene.control.TextField username;
+    @FXML
+    private javafx.scene.control.PasswordField passwordField;
 
     @FXML
     private void exitMenuItemAction(){
         // Get the stage
-        Stage stage = (Stage) primaryPane.getScene().getWindow();
-
-        stage.close();
+        System.exit(0);
     }
 
     @FXML
     private void fullscreenMenuItemAction(){
-        Stage stage = (Stage) primaryPane.getScene().getWindow();
-
-        // Switch current setting
-        stage.setFullScreen( !stage.isFullScreen() );
+            Stage stage = (Stage) primaryPane.getScene().getWindow();
+            stage.setMaximized(true);
 
     }
-
 
     @FXML
     private void sendMessage(ActionEvent event){
 
         System.out.println("Yah Yeet.");
     }
+
+    @FXML
+    private void setLogin(ActionEvent event) throws URISyntaxException {
+        String userid = username.getText();
+        String password = passwordField.getText();
+        ChatClientManager logIn = new ChatClientManager();
+        logIn.login(userid, password);
+        System.out.println("Login successful");
+    }
+    @FXML
+    private void createAccount(ActionEvent event) throws URISyntaxException {
+        String userid = username.getText();
+        String password = passwordField.getText();
+        ChatClientManager user = new ChatClientManager();
+        user.newUser(userid, password);
+        System.out.println("Account created");
+    }
+
+
 }
 
 
