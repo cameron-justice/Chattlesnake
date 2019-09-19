@@ -2,14 +2,18 @@ package chattlesnake;
 
 import javafx.fxml.FXML;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 
 public class MainController {
+
 
     @FXML
     private javafx.scene.layout.Pane primaryPane;
@@ -20,7 +24,15 @@ public class MainController {
     @FXML
     private javafx.event.ActionEvent sendMessage;
     @FXML
-    public TextArea messageDisplayArea;
+    public TextFlow messageDisplayArea;
+    @FXML
+    public TextArea messageSendArea;
+    @FXML
+    private javafx.scene.input.KeyEvent postMessage;
+    @FXML
+    private ScrollPane chatScroll;
+    @FXML
+    private Button sendButton;
 
     @FXML
     private void exitMenuItemAction(){
@@ -45,11 +57,21 @@ public class MainController {
 
         System.out.println("Yah Yeet.");
 
-        //DisplayManager disp = new DisplayManager();
-        Message msg = new Message(6969, "Hello there bro palarooni", LocalDateTime.now());
-        //disp.showMessage(msg);
-
         DisplayManager displayManager = new DisplayManager(this);
-        displayManager.showMessage(msg);
+        String toSend;
+        Message msg;
+        if (!messageSendArea.getText().isEmpty()) {
+            toSend = messageSendArea.getText().trim();
+            messageSendArea.clear();
+            msg = new Message(6969, toSend, LocalDateTime.now());
+            displayManager.showMessage(msg);
+            chatScroll.setVvalue(1);
+        }
+        messageSendArea.requestFocus();
+    }
+
+    public void postMessage(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals((KeyCode.ENTER)))
+            sendButton.fire();
     }
 }

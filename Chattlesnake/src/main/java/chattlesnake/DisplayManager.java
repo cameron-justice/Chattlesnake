@@ -1,17 +1,15 @@
 package chattlesnake;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListView;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * The DisplayManager class is responsible for taking the messages/groups being
@@ -27,13 +25,11 @@ public class DisplayManager {
     public void showMessage(Message msg) {
         int author_id = msg.getAuthor_id();
         int recipient_id = msg.getRecipient_id();
-        String message = msg.getMessage_body();
         String time = msg.getCreate_date().toLocalTime().truncatedTo(ChronoUnit.SECONDS).toString();
-
 
         System.out.println("From: " + author_id);
         System.out.println("To: " + recipient_id);
-        System.out.println("Message: " + message);
+        //System.out.println("Message: " + message);
 
         // Converts the time to 12-hour format
         try {
@@ -45,9 +41,14 @@ public class DisplayManager {
             e.printStackTrace();
         }
 
+        Text id = new Text(' ' + Integer.toString(author_id) + ": ");
+        //id.setStyle("-fx-font-weight: bold");
+        id.setFont(Font.font(null, FontWeight.BOLD, 18));
+        id.setFill(Color.ORANGERED);
+        Text message = new Text(msg.getMessage_body() + '\n');
+        message.setFont(Font.font(null, /*FontWeight.NORMAL,*/ 18));
 
-        controller.messageDisplayArea.appendText(Integer.toString(author_id) + ": ");
-        controller.messageDisplayArea.appendText(message + "\n");
+        controller.messageDisplayArea.getChildren().addAll(id, message);
     }
 
     public void showGroup(Group group) {
