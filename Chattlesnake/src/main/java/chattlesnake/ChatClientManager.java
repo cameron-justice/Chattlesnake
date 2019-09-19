@@ -19,7 +19,6 @@ public class ChatClientManager {
 
     // Constructor
     ChatClientManager() throws URISyntaxException {
-
         try {
             socket = IO.socket("https://chattlesnake-web-server.herokuapp.com/");
             socket.connect();
