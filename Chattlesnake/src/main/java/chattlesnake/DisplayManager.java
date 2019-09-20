@@ -41,7 +41,7 @@ public class DisplayManager {
             e.printStackTrace();
         }
 
-        Text id = new Text(' ' + Integer.toString(author_id) + ": ");
+        Text id = new Text(Integer.toString(author_id) + ": ");
         //id.setStyle("-fx-font-weight: bold");
         id.setFont(Font.font(null, FontWeight.BOLD, 18));
         id.setFill(Color.ORANGERED);
@@ -49,6 +49,7 @@ public class DisplayManager {
         message.setFont(Font.font(null, /*FontWeight.NORMAL,*/ 18));
 
         controller.messageDisplayArea.getChildren().addAll(id, message);
+        controller.chatScroll.setVvalue(1);
     }
 
     public void showGroup(Group group) {

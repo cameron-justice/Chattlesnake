@@ -30,7 +30,7 @@ public class MainController {
     @FXML
     private javafx.scene.input.KeyEvent postMessage;
     @FXML
-    private ScrollPane chatScroll;
+    public ScrollPane chatScroll;
     @FXML
     private Button sendButton;
 
@@ -60,18 +60,20 @@ public class MainController {
         DisplayManager displayManager = new DisplayManager(this);
         String toSend;
         Message msg;
-        if (!messageSendArea.getText().isEmpty()) {
+        if (!messageSendArea.getText().trim().isEmpty()) {
             toSend = messageSendArea.getText().trim();
             messageSendArea.clear();
             msg = new Message(6969, toSend, LocalDateTime.now());
             displayManager.showMessage(msg);
-            chatScroll.setVvalue(1);
+            //chatScroll.setVvalue(1);
         }
         messageSendArea.requestFocus();
     }
 
     public void postMessage(KeyEvent keyEvent) {
-        if (keyEvent.getCode().equals((KeyCode.ENTER)))
+        if (keyEvent.getCode().equals((KeyCode.ENTER))) {
             sendButton.fire();
+            messageSendArea.clear();
+        }
     }
 }
