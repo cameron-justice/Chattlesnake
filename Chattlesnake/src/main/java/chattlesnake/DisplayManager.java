@@ -16,6 +16,7 @@ import java.util.Date;
 public class DisplayManager {
 
     private MainController controller;
+
     public DisplayManager(MainController controller) {
         this.controller = controller;
     }

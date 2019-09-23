@@ -1,5 +1,8 @@
 package chattlesnake;
 
+import chattlesnake.ChatClientManager;
+import chattlesnake.DisplayManager;
+import chattlesnake.Message;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -7,6 +10,8 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 
 public class MainController {
@@ -30,21 +35,22 @@ public class MainController {
     public ScrollPane chatScroll;
     @FXML
     private Button sendButton;
+    @FXML
+    private javafx.scene.control.TextField username;
+    @FXML
+    private javafx.scene.control.PasswordField passwordField;
+
 
     @FXML
     private void exitMenuItemAction(){
         // Get the stage
-        Stage stage = (Stage) primaryPane.getScene().getWindow();
-
-        stage.close();
+        System.exit(0);
     }
 
     @FXML
     private void fullscreenMenuItemAction(){
         Stage stage = (Stage) primaryPane.getScene().getWindow();
-
-        // Switch current setting
-        stage.setFullScreen( !stage.isFullScreen() );
+        stage.setMaximized(true);
 
     }
 
@@ -55,12 +61,10 @@ public class MainController {
         System.out.println("Yah Yeet.");
 
         DisplayManager displayManager = new DisplayManager(this);
-        String toSend;
-        Message msg;
         if (!messageSendArea.getText().trim().isEmpty()) {
-            toSend = messageSendArea.getText().trim();
+            String toSend = messageSendArea.getText().trim();
             messageSendArea.clear();
-            msg = new Message(6969, toSend, LocalDateTime.now());
+            Message msg = new Message(6969, toSend, LocalDateTime.now());
             displayManager.showMessage(msg);
             //chatScroll.setVvalue(1);
         }
@@ -72,5 +76,22 @@ public class MainController {
             sendButton.fire();
             messageSendArea.clear();
         }
+    }
+
+    @FXML
+    private void setLogin(ActionEvent event) throws URISyntaxException {
+        String userid = username.getText();
+        String password = passwordField.getText();
+        ChatClientManager logIn = new ChatClientManager();
+        logIn.login(userid, password);
+        System.out.println("Login successful");
+    }
+    @FXML
+    private void createAccount(ActionEvent event) throws URISyntaxException {
+        String userid = username.getText();
+        String password = passwordField.getText();
+        ChatClientManager user = new ChatClientManager();
+        user.newUser(userid, password);
+        System.out.println("Account created");
     }
 }
