@@ -15,8 +15,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Main.fxml"));
-        primaryStage.setTitle("Chattlesnake");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("Main.fxml"));
+
+        Parent root = (Parent)loader.load();
+        primaryStage.setTitle("ChattleSnake");
         Scene primaryScene = new Scene(root, 1280, 720);
         primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
         primaryStage.setScene(primaryScene);
@@ -25,7 +28,7 @@ public class Main extends Application {
 
         // Manager Singletons
         I_CCM = new ChatClientManager();
-        I_DM = new DisplayManager();
+        I_DM = new DisplayManager(loader.getController());
 
     }
 
