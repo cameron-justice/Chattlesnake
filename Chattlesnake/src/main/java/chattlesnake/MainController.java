@@ -50,7 +50,7 @@ public class MainController {
     @FXML
     private void fullscreenMenuItemAction(){
         Stage stage = (Stage) primaryPane.getScene().getWindow();
-        stage.setMaximized(true);
+        stage.setFullScreen( !stage.isFullScreen() );
 
     }
 
@@ -77,20 +77,5 @@ public class MainController {
         }
     }
 
-    @FXML
-    private void setLogin(ActionEvent event) throws URISyntaxException {
-        String userid = username.getText();
-        String password = passwordField.getText();
-        ChatClientManager logIn = new ChatClientManager();
-        logIn.login(userid, password);
-        System.out.println("Login successful");
-    }
-    @FXML
-    private void createAccount(ActionEvent event) throws URISyntaxException {
-        String userid = username.getText();
-        String password = passwordField.getText();
-        ChatClientManager user = new ChatClientManager();
-        user.newUser(userid, password);
-        System.out.println("Account created");
-    }
+
 }
