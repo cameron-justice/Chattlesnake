@@ -8,6 +8,12 @@ import java.net.URISyntaxException;
 public class LoginController {
 
     @FXML
+    private javafx.scene.control.TextField username;
+    @FXML
+    private javafx.scene.control.PasswordField passwordField;
+
+
+    @FXML
     private void setLogin(ActionEvent event) throws URISyntaxException {
         String userid = username.getText();
         String password = passwordField.getText();

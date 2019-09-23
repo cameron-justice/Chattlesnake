@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Font?>
-<AnchorPane layoutX="502.0" layoutY="225.0" visible="false" style="-fx-background-color: orange;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="75.0">
+<AnchorPane layoutX="502.0" layoutY="225.0" visible="false" style="-fx-background-color: orange;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="75.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chattlesnake.LoginController">
     <children>
         <TextField alignment="CENTER" editable="false" layoutX="45.0" layoutY="19.0" prefHeight="31.0" prefWidth="226.0" style="-fx-background-color: orange; -fx-border-color: white;" text="Login or Create an Account" AnchorPane.bottomAnchor="450.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="50.0">
             <font>

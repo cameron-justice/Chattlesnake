@@ -35,10 +35,7 @@ public class MainController {
     public ScrollPane chatScroll;
     @FXML
     private Button sendButton;
-    @FXML
-    private javafx.scene.control.TextField username;
-    @FXML
-    private javafx.scene.control.PasswordField passwordField;
+
 
 
     @FXML
