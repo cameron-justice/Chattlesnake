@@ -60,12 +60,11 @@ public class MainController {
 
         System.out.println("Yah Yeet.");
 
-        DisplayManager displayManager = new DisplayManager(this);
         if (!messageSendArea.getText().trim().isEmpty()) {
             String toSend = messageSendArea.getText().trim();
             messageSendArea.clear();
             Message msg = new Message(6969, toSend, LocalDateTime.now());
-            displayManager.showMessage(msg);
+            Main.I_DM.showMessage(msg);
             //chatScroll.setVvalue(1);
         }
         messageSendArea.requestFocus();
