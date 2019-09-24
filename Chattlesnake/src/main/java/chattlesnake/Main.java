@@ -30,6 +30,7 @@ public class Main extends Application {
         I_CCM = new ChatClientManager();
         I_DM = new DisplayManager(loader.getController());
 
+
     }
 
     public static void main(String[] args) {

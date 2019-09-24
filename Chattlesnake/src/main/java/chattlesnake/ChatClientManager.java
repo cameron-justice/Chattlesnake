@@ -9,9 +9,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
+
+import org.apache.commons.codec.binary.Hex;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Random;
 
 public class ChatClientManager {
 
@@ -39,9 +55,10 @@ public class ChatClientManager {
     }
 
     /**
-     * Sends login information to the server. Encryption is handled there.
-     * @param username The username of the user
-     * @param password The plaintext password of the user
+     * Attempts to verify the user information and log in
+     * @param username given username by the user
+     * @param password given password by the user
+     * @return User if information correct, null if not correct
      */
     public User login(String username, String password){
         final User[] user = new User[1]; // Java needs this workaround because why not
@@ -51,20 +68,33 @@ public class ChatClientManager {
             public void call(Object... args) {
                 JSONObject jsonUser = (JSONObject) args[0];
 
-                int userID = jsonUser.getInt("user_id");
-                String name = jsonUser.getString("name");
-                LocalDateTime create_date = LocalDateTime.parse(jsonUser.getString("create_date"));
-                //TODO: User Pictures?
-
-                user[0] = new User(userID, name, create_date);
+                boolean loggedIn = (boolean) args[1];
+                if(loggedIn){
+                    int userID = jsonUser.getInt("user_id");
+                    String name = jsonUser.getString("name");
+                    LocalDateTime create_date = LocalDateTime.parse(jsonUser.getString("create_date"));
+                    user[0] = new User(userID, name, create_date);
+                }
+                else {
+                    user[0] = null;
+                }
             }
         });
 
         return user[0];
     }
 
-    public void newUser(String username, String password){
+    public boolean newUser(String username, String email, String password){
+        final boolean[] success = {false};
 
+        socket.emit(username, password, email, LocalDateTime.now().toString(), new Ack() {
+            @Override
+            public void call(Object... args) {
+                success[0] = (boolean) args[0];
+            }
+        });
+
+        return success[0];
     }
 
     public User getInfoOnUser(int user_id){
