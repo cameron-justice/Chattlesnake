@@ -2,10 +2,13 @@ package chattlesnake;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
@@ -20,10 +23,11 @@ public class Main extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("Login.fxml"));
         Parent root = (Parent)loader.load();
         primaryStage.setTitle("ChattleSnake");
-        Scene primaryScene = new Scene(root, 1280, 720);
-        //primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
+        Scene primaryScene = new Scene(root);
+        primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
         primaryStage.setScene(primaryScene);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
 
         // Manager Singletons

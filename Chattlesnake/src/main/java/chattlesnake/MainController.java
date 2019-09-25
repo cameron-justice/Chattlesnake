@@ -18,7 +18,7 @@ public class MainController {
 
 
     @FXML
-    private javafx.scene.layout.Pane primaryPane;
+    private javafx.scene.layout.AnchorPane primaryPane;
     @FXML
     private javafx.scene.control.MenuItem exitMenuItem;
     @FXML
