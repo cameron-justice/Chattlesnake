@@ -22,6 +22,7 @@ public class Main extends Application {
 
         loader.setLocation(getClass().getClassLoader().getResource("Login.fxml"));
         Parent root = (Parent)loader.load();
+
         primaryStage.setTitle("ChattleSnake");
         Scene primaryScene = new Scene(root);
         primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
@@ -33,6 +34,7 @@ public class Main extends Application {
         // Manager Singletons
         I_CCM = new ChatClientManager();
 //        I_DM = new DisplayManager(loader.getController());
+
 
     }
 
