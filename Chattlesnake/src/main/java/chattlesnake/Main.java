@@ -24,13 +24,11 @@ public class Main extends Application {
         primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
         primaryStage.setScene(primaryScene);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        primaryStage.show();
+        //primaryStage.show();
 
         // Manager Singletons
         I_CCM = new ChatClientManager();
         I_DM = new DisplayManager(loader.getController());
-
-
     }
 
     public static void main(String[] args) {

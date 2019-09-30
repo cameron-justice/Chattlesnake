@@ -90,7 +90,7 @@ public class MainController {
         String userid = username.getText();
         String password = passwordField.getText();
         ChatClientManager user = new ChatClientManager();
-        user.newUser(userid, password);
+        //user.newUser(userid, password);
         System.out.println("Account created");
     }
 }
