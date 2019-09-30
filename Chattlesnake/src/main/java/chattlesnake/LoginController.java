@@ -36,15 +36,15 @@ public class LoginController {
 
     @FXML
     private void login(ActionEvent event) throws URISyntaxException {
-        String userid = loginUsernameField.getText().trim();
+        String username = loginUsernameField.getText().trim();
         String password = loginPasswordField.getText().trim();
 
-        if (userid.isEmpty())
+        if (username.isEmpty())
             loginUsernameField.requestFocus();
         else if (password.isEmpty())
             loginPasswordField.requestFocus();
         else {
-            Main.I_CCM.login(userid, password);
+            login(username, password);
             Stage stage = (Stage) loginPane.getScene().getWindow();
             stage.close();
         }
@@ -66,12 +66,23 @@ public class LoginController {
         String password = accountPasswordField.getText().trim();
         String email = emailField.getText().trim();
 
-        if ( !(username.isEmpty() || password.isEmpty() || email.isEmpty()) ) {
-            Main.I_CCM.newUser( username, email, password );
+        if ( !(username.isEmpty() || password.isEmpty() || email.isEmpty()) )
+            accountUsernameField.requestFocus();
+        else if (password.isEmpty())
+            accountPasswordField.requestFocus();
+        else if (email.isEmpty())
+            emailField.requestFocus();
+        else {
+            if (Main.I_CCM.newUser( username, email, password ))
+                login(username, password);
         }
     }
 
     public void backAction(ActionEvent actionEvent) {
         accountPane.setVisible(false);
+    }
+
+    public void login(String username, String password) {
+
     }
 }
