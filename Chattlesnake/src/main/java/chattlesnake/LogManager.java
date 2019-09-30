@@ -1,6 +1,5 @@
 package chattlesnake;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import org.json.simple.JSONObject;
