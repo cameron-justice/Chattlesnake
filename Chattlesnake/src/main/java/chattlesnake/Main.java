@@ -16,6 +16,8 @@ public class Main extends Application {
     static public ChatClientManager I_CCM;
     static public DisplayManager I_DM;
 
+    static public User activeUser;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader();
@@ -25,7 +27,6 @@ public class Main extends Application {
 
         primaryStage.setTitle("ChattleSnake");
         Scene primaryScene = new Scene(root);
-        primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
         primaryStage.setScene(primaryScene);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.initStyle(StageStyle.UNDECORATED);

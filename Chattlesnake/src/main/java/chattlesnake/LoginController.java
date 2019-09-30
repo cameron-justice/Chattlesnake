@@ -32,8 +32,6 @@ public class LoginController {
     private AnchorPane accountPane;
 
 
-
-
     @FXML
     private void login(ActionEvent event) throws URISyntaxException {
         String username = loginUsernameField.getText().trim();
@@ -43,11 +41,8 @@ public class LoginController {
             loginUsernameField.requestFocus();
         else if (password.isEmpty())
             loginPasswordField.requestFocus();
-        else {
+        else
             login(username, password);
-            Stage stage = (Stage) loginPane.getScene().getWindow();
-            stage.close();
-        }
     }
 
     @FXML
@@ -66,14 +61,14 @@ public class LoginController {
         String password = accountPasswordField.getText().trim();
         String email = emailField.getText().trim();
 
-        if ( !(username.isEmpty() || password.isEmpty() || email.isEmpty()) )
+        if ( username.isEmpty() )
             accountUsernameField.requestFocus();
-        else if (password.isEmpty())
+        else if ( password.isEmpty() )
             accountPasswordField.requestFocus();
-        else if (email.isEmpty())
+        else if ( email.isEmpty() )
             emailField.requestFocus();
         else {
-            if (Main.I_CCM.newUser( username, email, password ))
+            if ( Main.I_CCM.newUser( username, email, password ) )
                 login(username, password);
         }
     }
@@ -82,7 +77,29 @@ public class LoginController {
         accountPane.setVisible(false);
     }
 
-    public void login(String username, String password) {
+    private void login(String username, String password) {
+        Main.activeUser = Main.I_CCM.login(username, password);
+        //if ( Main.activeUser.getID() != 0) {
+            Stage stage = (Stage) loginPane.getScene().getWindow();
+            stage.close();
 
+            try {
+                FXMLLoader loader = new FXMLLoader();
+
+                loader.setLocation(getClass().getClassLoader().getResource("Main.fxml"));
+                Parent root = (Parent) loader.load();
+
+                Stage primaryStage = new Stage();
+                primaryStage.setTitle("ChattleSnake");
+                Scene primaryScene = new Scene(root, 1280, 720);
+                primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
+                primaryStage.setScene(primaryScene);
+                primaryStage.show();
+
+                Main.I_DM = new DisplayManager(loader.getController());
+            } catch ( final IOException e) {
+                e.printStackTrace();
+            }
+        //}
     }
 }
