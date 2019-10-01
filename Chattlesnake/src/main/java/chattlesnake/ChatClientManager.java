@@ -53,7 +53,7 @@ public class ChatClientManager {
      * @param password given password by the user
      * @return User if information correct, null if not correct
      */
-    public User login(String username, String password){
+    public void login(String username, String password){
         loginResult = null;
 
         socket.emit("login", username, password, new Ack() {
@@ -83,9 +83,7 @@ public class ChatClientManager {
             public void call(Object... args) {
                 System.out.println("Called back");
                 newUserResult = (boolean) args[0];
-                if(newUserResult){
-                    Dispa
-                }
+                LoginController
             }
         });
     }
@@ -149,8 +147,6 @@ public class ChatClientManager {
             @Override
             public void call(Object... args) {
                 System.out.println("Connected: " + socket.connected());
-                System.out.println("Working? " + newUser("test3","test3@mtmail.mtsu.edu", "possible"));
-
             }
         }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() { // This happens when the socket disconnects from the server (or when the server forces disconnection)
             @Override
