@@ -17,26 +17,38 @@ public class Main extends Application {
     static public DisplayManager I_DM;
 
     static public User activeUser;
+    static public FXMLLoader loader = new FXMLLoader();
+    static private Parent root;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader();
-
+    public void start(Stage loginStage) throws Exception{
         loader.setLocation(getClass().getClassLoader().getResource("Login.fxml"));
         Parent root = (Parent)loader.load();
 
-        primaryStage.setTitle("ChattleSnake");
-        Scene primaryScene = new Scene(root);
-        primaryStage.setScene(primaryScene);
-        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.show();
+        loginStage.setTitle("ChattleSnake");
+        Scene loginScene = new Scene(root);
+        loginStage.setScene(loginScene);
+        loginStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        loginStage.initStyle(StageStyle.UNDECORATED);
+        loginStage.show();
 
         // Manager Singletons
         I_CCM = new ChatClientManager();
-//        I_DM = new DisplayManager(loader.getController());
+    }
 
+    public static void openChat() throws Exception {
+        loader = new FXMLLoader();
+        loader.setLocation(Main.class.getClassLoader().getResource("Main.fxml"));
 
+        root = (Parent)loader.load();
+        Stage mainStage = new Stage();
+        Scene mainScene = new Scene( root, 1280, 720 );
+
+        mainStage.setScene(mainScene);
+        mainStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        mainStage.show();
+
+        I_DM = new DisplayManager( Main.loader.getController() );
     }
 
     public static void main(String[] args) {
