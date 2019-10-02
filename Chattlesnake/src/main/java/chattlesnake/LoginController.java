@@ -29,6 +29,7 @@ public class LoginController {
     private AnchorPane accountPane;
 
     private boolean flag;
+    private User user;
 
     /**
      * Takes the information provided by the user in the text fields and calls this class's login function
@@ -67,6 +68,7 @@ public class LoginController {
             emailField.requestFocus();
         else {
             Main.I_CCM.newUser( username, email, password );
+            holdUp( 3 );
             if ( flag ) {
                 flag = false;
                 login(username, password);
@@ -81,8 +83,8 @@ public class LoginController {
      * @param password given password by the user
      */
     private void login(String username, String password) {
-        Main.activeUser = Main.I_CCM.login(username, password);
-
+        Main.I_CCM.login(username, password);
+        Main.activeUser = user;
         if (/*Main.activeUser.getID() != 0  Will need to be changed*/  true) {
             Stage stage = (Stage) loginPane.getScene().getWindow();
             stage.close();
@@ -123,5 +125,19 @@ public class LoginController {
      * @param flag a boolean sent by the server to update the pass variable
      */
     public void setFlag( boolean flag ) { this.flag = flag; }
+
+    /**
+     *
+     * @param flag
+     */
+    public void returnUser( boolean flag ) { this.user = user; }
+
+    private void holdUp( int seconds ) {
+        long start = System.currentTimeMillis();
+        long end = start + seconds*start;
+
+        while ( System.currentTimeMillis() < end ) {}
+
+    }
 
 }

@@ -49,7 +49,7 @@ public class Main extends Application {
         mainStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         mainStage.show();
 
-        I_DM = new DisplayManager( Main.loader.getController() );
+        I_DM = new DisplayManager( loader.getController() );
     }
 
     public static void main(String[] args) {
