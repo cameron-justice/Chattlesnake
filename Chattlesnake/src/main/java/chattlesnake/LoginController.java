@@ -81,7 +81,7 @@ public class LoginController {
      * @param password given password by the user
      */
     private void login(String username, String password) {
-        Main.activeUser = Main.I_CCM.login(username, password);
+        Main.I_CCM.login(username, password);
 
         if (/*Main.activeUser.getID() != 0  Will need to be changed*/  true) {
             Stage stage = (Stage) loginPane.getScene().getWindow();

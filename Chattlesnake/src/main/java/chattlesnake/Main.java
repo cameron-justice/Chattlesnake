@@ -33,7 +33,7 @@ public class Main extends Application {
         loginStage.show();
 
         // Manager Singletons
-        I_CCM = new ChatClientManager();
+        I_CCM = new ChatClientManager(loader.getController());
     }
 
     public static void openChat() throws Exception {

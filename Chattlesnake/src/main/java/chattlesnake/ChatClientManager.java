@@ -21,6 +21,7 @@ import java.util.LinkedList;
 public class ChatClientManager {
 
     private Socket socket;
+    private LoginController controller;
 
     private boolean newUserResult = false;
     private User loginResult = null;
@@ -28,8 +29,9 @@ public class ChatClientManager {
     private boolean updatedSequence = false;
 
     // Constructor
-    ChatClientManager() throws URISyntaxException {
+    ChatClientManager(LoginController controller) throws URISyntaxException {
         try {
+            this.controller = controller;
             socket = IO.socket("https://chattlesnake-web-server.herokuapp.com/");
             socket.connect();
             handleSocketEvents();
@@ -73,17 +75,16 @@ public class ChatClientManager {
                 }
             }
         });
-
-        return loginResult;
     }
 
     public void newUser(String username, String email, String password){
+        newUserResult = false;
         socket.emit("newUser", username, password, email, LocalDateTime.now().toString(), new Ack() {
             @Override
             public void call(Object... args) {
                 System.out.println("Called back");
                 newUserResult = (boolean) args[0];
-                LoginController
+                controller.setFlag(newUserResult);
             }
         });
     }
