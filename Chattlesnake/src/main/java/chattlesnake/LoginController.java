@@ -81,34 +81,18 @@ public class LoginController {
      * @param password given password by the user
      */
     private void login(String username, String password) {
-        //Main.activeUser = Main.I_CCM.login(username, password);
+        Main.activeUser = Main.I_CCM.login(username, password);
 
-//        if ( Main.activeUser.getID() != 0) {
+        if (/*Main.activeUser.getID() != 0  Will need to be changed*/  true) {
             Stage stage = (Stage) loginPane.getScene().getWindow();
             stage.close();
 
             try {
                 Main.openChat();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-/*            try {
-                Main.loader.setLocation(getClass().getClassLoader().getResource("Main.fxml"));
-                Parent groot = (Parent) Main.loader.load();
-
-                Stage primaryStage = new Stage();
-                primaryStage.setTitle("ChattleSnake");
-                Scene primaryScene = new Scene(groot, 1280, 720);
-                primaryScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
-                primaryStage.setScene(primaryScene);
-                primaryStage.show();
-
-                Main.I_DM = new DisplayManager( Main.loader.getController() );
-            } catch ( final IOException e ) {
-                e.printStackTrace();
-            }*/
-  //      }
+        }
     }
 
     /**
@@ -126,24 +110,18 @@ public class LoginController {
      * Disables the visibility of the create account pane
      * @param actionEvent a mouse click on the button
      */
-    public void backAction(ActionEvent actionEvent) {
-        accountPane.setVisible(false);
-    }
+    public void backAction(ActionEvent actionEvent) { accountPane.setVisible(false); }
 
     /**
      * Terminates the program
      * @param actionEvent a mouse click on the button
      */
-    public void exitProgram(ActionEvent actionEvent) {
-        System.exit(0);
-    }
+    public void exitProgram(ActionEvent actionEvent) { System.exit(0); }
 
     /**
      * The server's method of letting the controller know that login/account creation passed
      * @param flag a boolean sent by the server to update the pass variable
      */
-    public void setFlag( boolean flag ) {
-        this.flag = flag;
-    }
+    public void setFlag( boolean flag ) { this.flag = flag; }
 
 }

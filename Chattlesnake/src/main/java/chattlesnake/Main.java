@@ -42,6 +42,7 @@ public class Main extends Application {
 
         root = (Parent)loader.load();
         Stage mainStage = new Stage();
+        mainStage.setTitle("ChattleSnake");
         Scene mainScene = new Scene( root, 1280, 720 );
 
         mainStage.setScene(mainScene);
