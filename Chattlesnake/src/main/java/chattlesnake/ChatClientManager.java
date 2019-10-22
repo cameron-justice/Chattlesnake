@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.security.NoSuchAlgorithmException;
@@ -17,6 +18,12 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
+
+//TODO: All this stuff and more
+// Decode user and send to display
+// Decode messages and send to display
+
+
 
 public class ChatClientManager {
 
@@ -62,17 +69,6 @@ public class ChatClientManager {
             @Override
             public void call(Object... args) {
                 JSONObject jsonUser = (JSONObject) args[0];
-
-                boolean loggedIn = (boolean) args[1];
-                if(loggedIn){
-                    int userID = jsonUser.getInt("ID");
-                    String name = jsonUser.getString("name");
-                    LocalDateTime create_date = LocalDateTime.parse(jsonUser.getString("create_date"));
-                    loginResult = new User(userID, name, create_date);
-                }
-                else {
-                    loginResult = null;
-                }
             }
         });
     }
@@ -111,7 +107,7 @@ public class ChatClientManager {
 
     // Transmits a Message object to the server for distribution
     // @Param: msg; The Message object to be transmitted
-    public void sendMessage(Message msg){
+    public void sendMessage(Message msg) {
         // Holds a JSON version of the msg to send to the server
         JSONObject jsonMsg = new JSONObject();
 
@@ -122,7 +118,11 @@ public class ChatClientManager {
 
         socket.emit("chatMessage", jsonMsg);
 
-        //TODO: Send to LogManager
+        try{
+            Main.I_LM.log(msg);
+        } catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -171,13 +171,13 @@ public class ChatClientManager {
 
                     // Send message for display
                     Main.I_DM.showMessage(msg);
-                    //TODO: Send to LogManager
+                    Main.I_LM.log(msg);
 
-                } catch (JSONException e) {
+                } catch (JSONException | FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
-        }).on("getGroupInfo", new Emitter.Listener() { // This happens when the server sends the information for a group that the user is in
+        }).on("groupInfo", new Emitter.Listener() { // This happens when the server sends the information for a group that the user is in
             @Override
             public void call(Object... args) {
                 JSONObject jsonGroup = (JSONObject) args[0];
