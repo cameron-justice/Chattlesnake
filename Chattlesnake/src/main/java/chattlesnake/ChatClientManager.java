@@ -68,19 +68,25 @@ public class ChatClientManager {
         socket.emit("login", username, password, new Ack() {
             @Override
             public void call(Object... args) {
+                // Get User from server
                 JSONObject jsonUser = (JSONObject) args[0];
+                controller.setFlag((boolean) args[1]);
             }
         });
     }
 
     public void newUser(String username, String email, String password){
         newUserResult = false;
-        socket.emit("newUser", username, password, email, LocalDateTime.now().toString(), new Ack() {
+        String date = LocalDateTime.now().toString();
+        socket.emit("newUser", username, password, email, date, new Ack() {
             @Override
             public void call(Object... args) {
                 System.out.println("Called back");
                 newUserResult = (boolean) args[0];
                 controller.setFlag(newUserResult);
+
+                User user  = new User((int) args[1], username, LocalDateTime.parse(date));;
+                controller.returnUser(user);
             }
         });
     }
@@ -101,7 +107,7 @@ public class ChatClientManager {
                 user[0] = new User(userID, name, create_date);
             }
         });
-
+        
         return user[0];
     }
 
