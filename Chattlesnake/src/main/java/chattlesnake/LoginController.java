@@ -127,10 +127,10 @@ public class LoginController {
     public void setFlag( boolean flag ) { this.flag = flag; }
 
     /**
-     *
-     * @param flag
+     * Sets the user for the function, called by the ChatClientManager
+     * @param user the user variable sent from the function
      */
-    public void returnUser( boolean flag ) { this.user = user; }
+    public void returnUser( User user ) { this.user = user; }
 
     private void holdUp( int seconds ) {
         long start = System.currentTimeMillis();
