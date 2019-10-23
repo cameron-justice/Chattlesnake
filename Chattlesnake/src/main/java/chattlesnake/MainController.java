@@ -4,6 +4,10 @@ import chattlesnake.ChatClientManager;
 import chattlesnake.DisplayManager;
 import chattlesnake.Message;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.TextFlow;
@@ -11,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 
+import java.awt.*;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 
@@ -35,6 +40,7 @@ public class MainController {
     public ScrollPane chatScroll;
     @FXML
     private Button sendButton;
+    private Stage mainStage;
 
 
 
@@ -46,16 +52,13 @@ public class MainController {
 
     @FXML
     private void fullscreenMenuItemAction(){
-        Stage stage = (Stage) primaryPane.getScene().getWindow();
-        stage.setFullScreen( !stage.isFullScreen() );
+        mainStage.setMaximized(true);
 
     }
 
 
     @FXML
     private void sendMessage(ActionEvent event){
-
-        System.out.println("Yah Yeet.");
 
         if (!messageSendArea.getText().trim().isEmpty()) {
             String toSend = messageSendArea.getText().trim();
@@ -72,6 +75,10 @@ public class MainController {
             sendButton.fire();
             messageSendArea.clear();
         }
+    }
+
+    public void setStage(Stage stage){
+        mainStage = stage;
     }
 
 
