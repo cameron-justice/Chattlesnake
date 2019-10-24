@@ -8,7 +8,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class LoginController {
@@ -47,8 +46,6 @@ public class LoginController {
         else
             login(username, password);
     }
-
-
 
     /**
      * Collects the information sent by the user and calls the newUser function in the ChatClientManager

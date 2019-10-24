@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /home/kenalia/Documents/School/CL_Java/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/ChatClientManager.java
 /home/kenalia/Documents/School/CL_Java/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/LogManager.java
 /home/kenalia/Documents/School/CL_Java/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/LoginController.java
@@ -7,3 +8,14 @@
 /home/kenalia/Documents/School/CL_Java/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/User.java
 /home/kenalia/Documents/School/CL_Java/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/Group.java
 /home/kenalia/Documents/School/CL_Java/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/DisplayManager.java
+=======
+/Users/claysewell/Downloads/CSCI 3033/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/DisplayManager.java
+/Users/claysewell/Downloads/CSCI 3033/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/LoginController.java
+/Users/claysewell/Downloads/CSCI 3033/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/Group.java
+/Users/claysewell/Downloads/CSCI 3033/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/LogManager.java
+/Users/claysewell/Downloads/CSCI 3033/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/MainController.java
+/Users/claysewell/Downloads/CSCI 3033/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/User.java
+/Users/claysewell/Downloads/CSCI 3033/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/Main.java
+/Users/claysewell/Downloads/CSCI 3033/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/Message.java
+/Users/claysewell/Downloads/CSCI 3033/Chattlesnake/Chattlesnake/src/main/java/chattlesnake/ChatClientManager.java
+>>>>>>> b35943477c0cde6d0e3b7f53b186e05ab028dd4a

@@ -2,8 +2,13 @@ chattlesnake/LoginController.class
 chattlesnake/DisplayManager.class
 chattlesnake/ChatClientManager$6.class
 chattlesnake/ChatClientManager$7.class
+<<<<<<< HEAD
 chattlesnake/ChatClientManager$8.class
 chattlesnake/Message.class
+=======
+chattlesnake/Message.class
+chattlesnake/ChatClientManager$8.class
+>>>>>>> b35943477c0cde6d0e3b7f53b186e05ab028dd4a
 chattlesnake/MainController.class
 chattlesnake/LogManager.class
 chattlesnake/Group.class
