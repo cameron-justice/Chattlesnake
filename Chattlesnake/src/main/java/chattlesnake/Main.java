@@ -17,7 +17,7 @@ public class Main extends Application {
     // Singleton pattern for managers
     static public ChatClientManager I_CCM;
     static public DisplayManager I_DM;
-    static public LogManager I_LM;
+    static public LogManager I_LM = new LogManager();
     static public RelationsManager I_RM = new RelationsManager();
 
     static public User activeUser;
