@@ -11,12 +11,8 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.nio.charset.Charset;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 //TODO: All this stuff and more
@@ -29,11 +25,6 @@ public class ChatClientManager {
 
     private Socket socket;
     private LoginController controller;
-
-    private boolean newUserResult = false;
-    private User loginResult = null;
-
-    private boolean updatedSequence = false;
 
     // Constructor
     ChatClientManager(LoginController controller) throws URISyntaxException {
@@ -63,30 +54,41 @@ public class ChatClientManager {
      * @return User if information correct, null if not correct
      */
     public void login(String username, String password){
-        loginResult = null;
-
         socket.emit("login", username, password, new Ack() {
             @Override
             public void call(Object... args) {
                 // Get User from server
-                JSONObject jsonUser = (JSONObject) args[0];
-                controller.setFlag((boolean) args[1]);
+                boolean res = (boolean) args[1];
+                if(res){
+                    JSONObject jsonUser = (JSONObject) args[0];
+
+                    int userID = jsonUser.getInt("user_id");
+                    String name = jsonUser.getString("name");
+                    LocalDate create_date = LocalDate.parse(jsonUser.getString("create_date"));
+
+                    controller.returnUser(new User(userID, name, create_date));
+                }
+                System.out.println(res);
+                controller.setFlag(res);
             }
         });
     }
 
     public void newUser(String username, String email, String password){
-        newUserResult = false;
-        String date = LocalDateTime.now().toString();
+        String date = LocalDate.now().toString();
         socket.emit("newUser", username, password, email, date, new Ack() {
             @Override
             public void call(Object... args) {
                 System.out.println("Called back");
-                newUserResult = (boolean) args[0];
-                controller.setFlag(newUserResult);
+                boolean res = (boolean) args[0];
+                // Tell LoginController if the user was created
+                controller.setFlag(res);
 
-                User user  = new User((int) args[1], username, LocalDateTime.parse(date));;
-                controller.returnUser(user);
+                // Give LoginController the user if it was created
+                if(res){
+                    User user  = new User((int) args[1], username, LocalDate.parse(date));;
+                    controller.returnUser(user);
+                }
             }
         });
     }
@@ -101,13 +103,13 @@ public class ChatClientManager {
 
                 int userID = jsonUser.getInt("user_id");
                 String name = jsonUser.getString("name");
-                LocalDateTime create_date = LocalDateTime.parse(jsonUser.getString("create_date"));
+                LocalDate create_date = LocalDate.parse(jsonUser.getString("create_date"));
                 //TODO: User Pictures?
 
                 user[0] = new User(userID, name, create_date);
             }
         });
-        
+
         return user[0];
     }
 
@@ -208,7 +210,7 @@ public class ChatClientManager {
                     public void call(Object... args) {
                         JSONObject jsonUser = (JSONObject) args[0];
 
-                        User user = new User(jsonUser.getInt("ID"), jsonUser.getString("name"), LocalDateTime.parse(jsonUser.getString("create_date")));
+                        User user = new User(jsonUser.getInt("ID"), jsonUser.getString("name"), LocalDate.parse(jsonUser.getString("create_date")));
                         group.addMember(user);
                     }
                 }));

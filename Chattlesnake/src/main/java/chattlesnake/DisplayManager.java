@@ -24,6 +24,7 @@ public class DisplayManager {
     public void showMessage(Message msg) {
         int author_id = msg.getAuthor_id();
         int recipient_id = msg.getRecipient_id();
+
         String time = msg.getCreate_date().toLocalTime().truncatedTo(ChronoUnit.SECONDS).toString();
 
         System.out.println("From: " + author_id);

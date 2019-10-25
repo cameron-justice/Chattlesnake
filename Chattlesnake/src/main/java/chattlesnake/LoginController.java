@@ -8,8 +8,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class LoginController {
 
@@ -48,8 +48,6 @@ public class LoginController {
             login(username, password);
     }
 
-
-
     /**
      * Collects the information sent by the user and calls the newUser function in the ChatClientManager
      * If a new user was successfully created, calls this class's login function also
@@ -69,9 +67,9 @@ public class LoginController {
         else {
             flag = false;
             Main.I_CCM.newUser( username, email, password );
-            //holdUp( 3 );
+            holdUp( 3 );
             if ( flag ) {
-                login(username, password);
+                //login(username, password);
                 System.out.println("Account Successfully Created!");
             }
         }
@@ -127,7 +125,9 @@ public class LoginController {
      * The server's method of letting the controller know that login/account creation passed
      * @param flag a boolean sent by the server to update the pass variable
      */
-    public void setFlag( boolean flag ) { this.flag = flag; }
+    public void setFlag( boolean flag ) {
+        this.flag = flag;
+    }
 
     /**
      * Sets the user for the function, called by the ChatClientManager
@@ -136,10 +136,15 @@ public class LoginController {
     public void returnUser( User user ) { this.user = user; }
 
     private void holdUp( int seconds ) {
-        long start = System.currentTimeMillis();
+        /*long start = System.currentTimeMillis();
         long end = start + seconds*start;
 
-        while ( System.currentTimeMillis() < end ) {}
+        while ( System.currentTimeMillis() < end ) {}*/
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch ( Exception e ){
+            e.printStackTrace();
+        }
 
     }
 

@@ -1,12 +1,12 @@
 package chattlesnake;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class User {
 
     private int ID;
     private String name;
-    private LocalDateTime create_date;
+    private LocalDate create_date;
 
     /**
      * Default constructor
@@ -21,7 +21,7 @@ public class User {
      * @param name name of the user
      * @param create_date DateTime the user joined Chattlesnake
      */
-    User(int ID, String name, LocalDateTime create_date){
+    User(int ID, String name, LocalDate create_date){
         this.ID = ID;
         this.name = name;
         this.create_date = create_date;
@@ -43,11 +43,11 @@ public class User {
         this.name = name;
     }
 
-    public LocalDateTime getCreate_date() {
+    public LocalDate getCreate_date() {
         return create_date;
     }
 
-    public void setCreate_date(LocalDateTime create_date) {
+    public void setCreate_date(LocalDate create_date) {
         this.create_date = create_date;
     }
 }
