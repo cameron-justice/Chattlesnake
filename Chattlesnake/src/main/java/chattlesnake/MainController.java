@@ -63,7 +63,7 @@ public class MainController {
         if (!messageSendArea.getText().trim().isEmpty()) {
             String toSend = messageSendArea.getText().trim();
             messageSendArea.clear();
-            Message msg = new Message(6969, toSend, LocalDateTime.now());
+            Message msg = new Message(Main.activeUser.getID(), toSend, LocalDateTime.now());
             Main.I_DM.showMessage(msg);
             //chatScroll.setVvalue(1);
         }

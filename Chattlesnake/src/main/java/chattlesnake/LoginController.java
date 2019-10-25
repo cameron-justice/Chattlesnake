@@ -2,13 +2,11 @@ package chattlesnake;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import java.io.IOException;
+
 import java.util.concurrent.TimeUnit;
 
 public class LoginController {
@@ -69,7 +67,7 @@ public class LoginController {
             Main.I_CCM.newUser( username, email, password );
             holdUp( 3 );
             if ( flag ) {
-                //login(username, password);
+                login(username, password);
                 System.out.println("Account Successfully Created!");
             }
         }
@@ -95,6 +93,8 @@ public class LoginController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            System.out.println( "User ID: " + Main.activeUser.getID() );
         }
     }
 
@@ -135,11 +135,11 @@ public class LoginController {
      */
     public void returnUser( User user ) { this.user = user; }
 
+    /**
+     * Pauses the system for a specified number of seconds
+     * @param seconds
+     */
     private void holdUp( int seconds ) {
-        /*long start = System.currentTimeMillis();
-        long end = start + seconds*start;
-
-        while ( System.currentTimeMillis() < end ) {}*/
         try {
             TimeUnit.SECONDS.sleep(seconds);
         } catch ( Exception e ){

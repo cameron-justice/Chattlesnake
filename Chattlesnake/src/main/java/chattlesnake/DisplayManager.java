@@ -41,7 +41,8 @@ public class DisplayManager {
             e.printStackTrace();
         }
 
-        Text id = new Text(Integer.toString(author_id) + ": ");
+        String username = getUsername(author_id);
+        Text id = new Text("[" + Integer.toString(author_id) + "] " + username + ": ");
         //id.setStyle("-fx-font-weight: bold");
         id.setFont(Font.font(null, FontWeight.BOLD, 18));
         id.setFill(Color.ORANGERED);
@@ -51,6 +52,14 @@ public class DisplayManager {
         controller.messageDisplayArea.getChildren().addAll(id, message);
         controller.chatScroll.setVvalue(1);
     }
+
+    private String getUsername(int id) {
+        if (id == Main.activeUser.getID())
+            return Main.activeUser.getName();
+        else
+            return "Some Fuckup";
+    }
+
 
     public void showGroup(Group group) {
 
