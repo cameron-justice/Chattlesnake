@@ -71,7 +71,6 @@ public class ChatClientManager {
 
                     controller.returnUser(new User(userID, name, create_date));
                 }
-                System.out.println(res);
                 controller.setFlag(res);
             }
         });
