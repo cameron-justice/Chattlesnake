@@ -16,6 +16,7 @@ public class Main extends Application {
     static public ChatClientManager I_CCM;
     static public DisplayManager I_DM;
     static public LogManager I_LM;
+    static public RelationsManager I_RM = new RelationsManager();
 
     static public User activeUser;
     static public FXMLLoader loader = new FXMLLoader();
