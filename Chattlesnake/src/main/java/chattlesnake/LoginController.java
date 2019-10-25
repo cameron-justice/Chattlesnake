@@ -1,9 +1,13 @@
 package chattlesnake;
 
+import com.sun.javafx.event.EventQueue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -25,6 +29,10 @@ public class LoginController {
     private PasswordField accountPasswordField;
     @FXML
     private AnchorPane accountPane;
+    @FXML
+    private KeyEvent enterPress;
+    @FXML
+    private Button loginButton;
 
     private boolean flag;
     private User user;
@@ -146,6 +154,12 @@ public class LoginController {
             e.printStackTrace();
         }
 
+    }
+
+    public void enterPress(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals((KeyCode.ENTER))) {
+            loginButton.fire();
+        }
     }
 
 }
