@@ -58,7 +58,7 @@ public class DisplayManager {
         if (id == Main.activeUser.getID())
             return Main.activeUser.getName();
         else
-            return "Some Fuckup";
+            return Main.I_RM.getUsername(id);
     }
 
 
