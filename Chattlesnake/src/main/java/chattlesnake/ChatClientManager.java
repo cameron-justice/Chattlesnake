@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
@@ -62,7 +63,6 @@ public class ChatClientManager {
                 // Get User from server
                 boolean res = (boolean) args[1];
                 if(res){
-                    System.out.println("Res is true");
                     JSONObject jsonUser = (JSONObject) args[0];
 
                     int userID = jsonUser.getInt("user_id");
@@ -81,7 +81,6 @@ public class ChatClientManager {
         socket.emit("newUser", username, password, email, date, new Ack() {
             @Override
             public void call(Object... args) {
-                System.out.println("Called back");
                 boolean res = (boolean) args[0];
                 // Tell LoginController if the user was created
                 controller.setFlag(res);
@@ -164,20 +163,17 @@ public class ChatClientManager {
             public void call(Object... args) {
                 System.out.println("Disconnected");
             }
-        }).on("chatMessage", new Emitter.Listener() { // This happens when the server sends a message to the socket
+        }).on("receiveMessage", new Emitter.Listener() { // This happens when the server sends a message to the socket
             @Override
             public void call(Object... args) {
                 JSONObject jsonMsg = (JSONObject) args[0];
                 try {
                     int senderId = jsonMsg.getInt("creator");
-                    String msgBody = jsonMsg.getString("message_body");
-                    LocalDateTime createDate =  LocalDateTime.parse(jsonMsg.getString("create_date")); // TODO: Make sure this doesn't break converting string to LocalDateTime
+                    String msgBody = jsonMsg.getString("msg_body");
+                    LocalDateTime createDate = getDateTimeFromString(jsonMsg.getString("create_datetime")); // TODO: Make sure this doesn't break converting string to LocalDateTime
 
                     // Make the message object
-                    Message msg = new Message();
-                    msg.setAuthor_id(senderId);
-                    msg.setCreate_date(createDate);
-                    msg.setMessage_body(msgBody);
+                    Message msg = new Message(senderId, Main.activeUser.getID(), msgBody, createDate);
 
                     // Send message for display
                     Main.I_DM.showMessage(msg);
@@ -195,7 +191,7 @@ public class ChatClientManager {
 
                 int ID = jsonGroup.getInt("ID");
                 String name = (String) jsonGroup.get("name");
-                LocalDateTime create_date = LocalDateTime.parse(jsonGroup.getString("create_date"));
+                LocalDateTime create_date = getDateTimeFromString(jsonGroup.getString("create_date"));
 
                 LinkedList<Integer> memberIDs = new LinkedList<Integer>(); // Hold the IDs of the members
 
@@ -237,6 +233,12 @@ public class ChatClientManager {
 
     private LocalDate getDateFromString(String dt){
         return LocalDate.of(Integer.parseInt(dt.substring(0,3)), Integer.parseInt(dt.substring(5,6)), Integer.parseInt(dt.substring(8, 9)));
+    }
+
+    private LocalDateTime getDateTimeFromString(String dt){
+        LocalDate date = LocalDate.of(Integer.parseInt(dt.substring(0,3)), Integer.parseInt(dt.substring(5,6)), Integer.parseInt(dt.substring(8, 9)));
+        LocalTime time = LocalTime.of(Integer.parseInt(dt.substring(11, 12)), Integer.parseInt(dt.substring(14, 15)), Integer.parseInt(dt.substring(17, 18)));
+        return LocalDateTime.of(date, time);
     }
 
 }

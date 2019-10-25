@@ -14,7 +14,7 @@ public class Message {
 
     }
 
-    Message(int author_id, String message_body, LocalDateTime create_date){
+    Message(int author_id, int recipient_id, String message_body, LocalDateTime create_date){
         this.author_id = author_id;
         this.recipient_id = recipient_id;
         this.message_body = message_body;
