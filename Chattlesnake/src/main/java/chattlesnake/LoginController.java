@@ -67,10 +67,10 @@ public class LoginController {
         else if ( email.isEmpty() )
             emailField.requestFocus();
         else {
+            flag = false;
             Main.I_CCM.newUser( username, email, password );
-            holdUp( 3 );
+            //holdUp( 3 );
             if ( flag ) {
-                flag = false;
                 login(username, password);
                 System.out.println("Account Successfully Created!");
             }
@@ -85,6 +85,8 @@ public class LoginController {
     private void login(String username, String password) {
         flag = false;
         Main.I_CCM.login(username, password);
+        holdUp(3);
+        System.out.println(flag);
         Main.activeUser = user;
         if (flag) {
             Stage stage = (Stage) loginPane.getScene().getWindow();
