@@ -49,6 +49,7 @@ public class DisplayManager {
         Text message = new Text(msg.getMessage_body() + '\n');
         message.setFont(Font.font(null, /*FontWeight.NORMAL,*/ 18));
 
+        Main.I_CCM.sendMessage(msg);
         controller.messageDisplayArea.getChildren().addAll(id, message);
         controller.chatScroll.setVvalue(1);
     }
@@ -57,7 +58,7 @@ public class DisplayManager {
         if (id == Main.activeUser.getID())
             return Main.activeUser.getName();
         else
-            return "Some Fuckup";
+            return Main.I_RM.getUsername(id);
     }
 
 

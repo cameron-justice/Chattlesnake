@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
 
 public class LogManager {
     public void log(Message mess) throws FileNotFoundException {
-        System.out.println("This is the branch section");
-
 
         JSONObject log = new JSONObject();
         int author_id = 0;
