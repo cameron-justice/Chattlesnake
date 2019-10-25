@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
 //TODO: All this stuff and more
@@ -54,17 +55,19 @@ public class ChatClientManager {
      * @return User if information correct, null if not correct
      */
     public void login(String username, String password){
+        System.out.println("Loggin In");
         socket.emit("login", username, password, new Ack() {
             @Override
             public void call(Object... args) {
                 // Get User from server
                 boolean res = (boolean) args[1];
                 if(res){
+                    System.out.println("Res is true");
                     JSONObject jsonUser = (JSONObject) args[0];
 
                     int userID = jsonUser.getInt("user_id");
                     String name = jsonUser.getString("name");
-                    LocalDate create_date = LocalDate.parse(jsonUser.getString("create_date"));
+                    LocalDate create_date = getDateFromString(jsonUser.getString("create_date"));
 
                     controller.returnUser(new User(userID, name, create_date));
                 }
@@ -231,6 +234,10 @@ public class ChatClientManager {
         });
 
         //TODO: Convert these to individual socket.on with Emitter.Listener functions for readability
+    }
+
+    private LocalDate getDateFromString(String dt){
+        return LocalDate.of(Integer.parseInt(dt.substring(0,3)), Integer.parseInt(dt.substring(5,6)), Integer.parseInt(dt.substring(8, 9)));
     }
 
 }
