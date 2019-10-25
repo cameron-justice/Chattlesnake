@@ -10,6 +10,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.time.LocalDateTime;
+
 public class Main extends Application {
 
     // Singleton pattern for managers

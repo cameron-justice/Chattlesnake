@@ -62,7 +62,6 @@ public class ChatClientManager {
                 // Get User from server
                 boolean res = (boolean) args[1];
                 if(res){
-                    System.out.println("Res is true");
                     JSONObject jsonUser = (JSONObject) args[0];
 
                     int userID = jsonUser.getInt("user_id");
@@ -81,7 +80,6 @@ public class ChatClientManager {
         socket.emit("newUser", username, password, email, date, new Ack() {
             @Override
             public void call(Object... args) {
-                System.out.println("Called back");
                 boolean res = (boolean) args[0];
                 // Tell LoginController if the user was created
                 controller.setFlag(res);
