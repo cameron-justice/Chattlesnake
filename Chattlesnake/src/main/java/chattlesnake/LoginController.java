@@ -35,6 +35,7 @@ public class LoginController {
     private Button loginButton;
 
     private boolean flag;
+    private boolean loginAttempt = false;
     private User user;
 
     /**
@@ -87,11 +88,19 @@ public class LoginController {
      * @param password given password by the user
      */
     private void login(String username, String password) {
-        flag = false;
-        Main.I_CCM.login(username, password);
-        holdUp(3);
-        System.out.println(flag);
-        Main.activeUser = user;
+        // Flag variable is reset by the server using the setFlag function
+        if (!loginAttempt) {
+            loginAttempt = true;
+            flag = false;
+            Main.I_CCM.login(username, password);
+            holdUp(2);
+            System.out.println(flag);
+            Main.activeUser = user;
+        } else {
+            holdUp(1);
+            loginAttempt = false;
+        }
+
         if (flag) {
             Stage stage = (Stage) loginPane.getScene().getWindow();
             stage.close();
@@ -102,7 +111,7 @@ public class LoginController {
                 e.printStackTrace();
             }
 
-            System.out.println( "User ID: " + Main.activeUser.getID() );
+            System.out.println("User ID: " + Main.activeUser.getID());
         }
     }
 
@@ -157,9 +166,8 @@ public class LoginController {
     }
 
     public void enterPress(KeyEvent keyEvent) {
-        if (keyEvent.getCode().equals((KeyCode.ENTER))) {
+        if (keyEvent.getCode().equals((KeyCode.ENTER)))
             loginButton.fire();
-        }
     }
 
 }

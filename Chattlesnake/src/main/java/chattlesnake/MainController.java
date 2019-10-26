@@ -63,7 +63,7 @@ public class MainController {
         if (!messageSendArea.getText().trim().isEmpty()) {
             String toSend = messageSendArea.getText().trim();
             messageSendArea.clear();
-            Message msg = new Message(Main.activeUser.getID(), getRecipientID(), toSend, LocalDateTime.now());
+            Message msg = new Message(Main.activeUser.getID(), 50, toSend, LocalDateTime.now());
             Main.I_DM.showMessage(msg);
             //chatScroll.setVvalue(1);
         }
@@ -80,9 +80,4 @@ public class MainController {
     public void setStage(Stage stage){
         mainStage = stage;
     }
-
-    private int getRecipientID(){
-        return 69;
-    }
-
 }
