@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -123,7 +124,11 @@ public class ChatClientManager {
         jsonMsg.put("client_id", msg.getAuthor_id());
         jsonMsg.put("recipient_id", msg.getAuthor_id());
         jsonMsg.put("message_body", msg.getMessage_body());
-        jsonMsg.put("create_date", msg.getCreate_date());
+        String dt = msg.getCreate_date().toString();
+        System.out.println(dt);
+        dt = dt.substring(0,9) + " " + dt.substring(11,19);
+        System.out.println(dt);
+        jsonMsg.put("create_date", dt);
 
         socket.emit("chatMessage", jsonMsg);
 
