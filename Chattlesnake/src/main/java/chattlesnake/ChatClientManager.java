@@ -130,6 +130,8 @@ public class ChatClientManager {
         System.out.println(dt);
         jsonMsg.put("create_date", dt);
 
+        System.out.println(jsonMsg.getInt("client_id"));
+
         socket.emit("chatMessage", jsonMsg);
 
         try{
@@ -241,9 +243,14 @@ public class ChatClientManager {
     }
 
     private LocalDateTime getDateTimeFromString(String dt){
-        LocalDate date = LocalDate.of(Integer.parseInt(dt.substring(0,3)), Integer.parseInt(dt.substring(5,6)), Integer.parseInt(dt.substring(8, 9)));
-        LocalTime time = LocalTime.of(Integer.parseInt(dt.substring(11, 12)), Integer.parseInt(dt.substring(14, 15)), Integer.parseInt(dt.substring(17, 18)));
-        return LocalDateTime.of(date, time);
+        if(dt.length() == 16){ // Make sure server isnt returning a pruned date DEMO ONLY
+            LocalDate date = LocalDate.of(Integer.parseInt(dt.substring(0,3)), Integer.parseInt(dt.substring(5,6)), Integer.parseInt(dt.substring(8, 9)));
+            LocalTime time = LocalTime.of(Integer.parseInt(dt.substring(11, 12)), Integer.parseInt(dt.substring(14, 15)), Integer.parseInt(dt.substring(17, 18)));
+            return LocalDateTime.of(date, time);
+        }
+        else {
+            return LocalDateTime.now();
+        }
     }
 
 }

@@ -29,7 +29,8 @@ public class DisplayManager {
         int recipient_id = msg.getRecipient_id();
 
         System.out.println("From: " + author_id);
-        System.out.println("To: " + recipient_id);
+        //System.out.println("To: " + recipient_id);
+        System.out.println("To: " + Main.activeUser.getID()); // DEMO CODE
         //System.out.println("Message: " + message);
 
         // Converts the time to 12-hour format
@@ -46,7 +47,6 @@ public class DisplayManager {
         Text message = new Text(msg.getMessage_body() + '\n');
         message.setFont(Font.font(null, /*FontWeight.NORMAL,*/ 18));
 
-        Main.I_CCM.sendMessage(msg);
         controller.messageDisplayArea.getChildren().addAll(id, message);
         controller.chatScroll.setVvalue(1);
     }
