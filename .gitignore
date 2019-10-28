@@ -4,6 +4,9 @@
 # Log file
 *.log
 
+# IML Files
+*.iml
+
 # BlueJ files
 *.ctxt
 
@@ -25,3 +28,4 @@ hs_err_pid*
 # Maven build-specific directories
 target/
 .idea/
+Log.txt
