@@ -59,6 +59,7 @@
       <MenuButton layoutX="-1.0" layoutY="1.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="63.0" style="-fx-background-color: #212121;" text="Menu" textFill="#aea3a3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#fullscreenMenuItemAction" text="Fullscreen" />
+            <MenuItem mnemonicParsing="false" onAction="#fullscreenMenuItemAction" text="Clear" />
           <MenuItem mnemonicParsing="false" onAction="#exitMenuItemAction" text="Exit" />
         </items>
       </MenuButton>
