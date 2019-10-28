@@ -51,13 +51,6 @@ public class MainController {
     }
 
     @FXML
-    private void fullscreenMenuItemAction(){
-        mainStage.setMaximized(true);
-
-    }
-
-
-    @FXML
     private void sendMessage(ActionEvent event){
 
         if (!messageSendArea.getText().trim().isEmpty()) {
@@ -80,5 +73,12 @@ public class MainController {
 
     public void setStage(Stage stage){
         mainStage = stage;
+    }
+
+    public void clearChat(ActionEvent actionEvent) {
+        Main.I_DM.clearChat();
+    }
+
+    public void fullscreenMenuItemAction(ActionEvent actionEvent) {
     }
 }
