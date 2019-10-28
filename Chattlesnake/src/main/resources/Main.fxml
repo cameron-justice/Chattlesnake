@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -8,14 +9,9 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
@@ -29,7 +25,7 @@
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
             </Label>
-            <Label text="A Java Based Chat Application" textFill="#ddd5d2">
+            <Label text="Communicate Strikingly Fast" textFill="#ddd5d2">
                <font>
                   <Font size="14.0" />
                </font>
@@ -55,6 +51,9 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <ListView id="profileSection" layoutX="54.0" prefHeight="408.0" prefWidth="226.0" style="-fx-background-color: #424242;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="0.0" />
       <MenuButton layoutX="-1.0" layoutY="1.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="51.0" style="-fx-background-color: #212121;" text="Bar" textFill="#aea3a3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
