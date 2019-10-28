@@ -78,4 +78,7 @@ public class MainController {
     public void clearChat(ActionEvent actionEvent) {
         Main.I_DM.clearChat();
     }
+
+    public void fullscreenMenuItemAction(ActionEvent actionEvent) {
+    }
 }
