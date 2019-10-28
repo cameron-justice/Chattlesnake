@@ -159,6 +159,8 @@ public class ChatClientManager {
             public void call(Object... args) {
                 JSONObject jsonMsg = (JSONObject) args[0];
                 try {
+                    System.out.println("Working");
+
                     int senderId = jsonMsg.getInt("creator");
                     String msgBody = jsonMsg.getString("msg_body");
                     LocalDateTime createDate = getDateTimeFromString(jsonMsg.getString("create_datetime")); // TODO: Make sure this doesn't break converting string to LocalDateTime
@@ -227,7 +229,7 @@ public class ChatClientManager {
             public void call(Object... args) {
                 JSONObject jsonUser = (JSONObject) args[0];
 
-                int ID = jsonUser.getInt("user_id");
+                int ID = jsonUser.getInt("ID");
                 String name = jsonUser.getString("name");
                 LocalDate create_date = getDateFromString(jsonUser.getString("create_date"));
                 //TODO: User Pictures?

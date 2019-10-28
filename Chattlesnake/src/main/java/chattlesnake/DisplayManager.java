@@ -1,5 +1,6 @@
 package chattlesnake;
 
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -47,8 +48,13 @@ public class DisplayManager {
         Text message = new Text(msg.getMessage_body() + '\n');
         message.setFont(Font.font(null, /*FontWeight.NORMAL,*/ 18));
 
-        controller.messageDisplayArea.getChildren().addAll(id, message);
-        controller.chatScroll.setVvalue(1);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                controller.messageDisplayArea.getChildren().addAll(id, message);
+                controller.chatScroll.setVvalue(1);
+            }
+        });
     }
 
     private String getUsername(int id) {

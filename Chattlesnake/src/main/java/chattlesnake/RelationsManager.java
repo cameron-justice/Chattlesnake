@@ -6,6 +6,10 @@ public class RelationsManager {
 
     LinkedList<User> knownUsers;
 
+    public RelationsManager(){
+        knownUsers = new LinkedList<User>();
+    }
+
     public void addKnownUser(User user) {
         knownUsers.add(user);
     }
@@ -49,7 +53,7 @@ public class RelationsManager {
      * @return true if known, false if unknown
      */
     public boolean KnowUser(int user_id){
-        for (User user: knownUsers) {
+        for (User user : knownUsers) {
             if ( user.getID() == user_id)
                 return true;
         }

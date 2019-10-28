@@ -65,6 +65,7 @@ public class MainController {
             messageSendArea.clear();
             Message msg = new Message(Main.activeUser.getID(), 50, toSend, LocalDateTime.now());
             Main.I_DM.showMessage(msg);
+            Main.I_CCM.sendMessage(msg);
             //chatScroll.setVvalue(1);
         }
         messageSendArea.requestFocus();
