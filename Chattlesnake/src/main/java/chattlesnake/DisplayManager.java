@@ -81,7 +81,6 @@ public class DisplayManager {
 
     }
 
-<<<<<<< HEAD
     /**
      * Pauses the system for a specified number of seconds
      * @param seconds
@@ -94,7 +93,5 @@ public class DisplayManager {
         }
 
     }
-=======
     public void clearChat() { controller.messageDisplayArea.getChildren().clear(); }
->>>>>>> 344552b791e9f4975dc7e08621fdefa502ff0596
 }
