@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The DisplayManager class is responsible for taking the messages/groups being
@@ -39,6 +40,7 @@ public class DisplayManager {
         LocalTime time = cd.toLocalTime();
         LocalDate date = cd.toLocalDate();
         System.out.println("Message sent at: " + time.toString());
+
 
         String username = getUsername(author_id);
         Text id = new Text("[" + Integer.toString(author_id) + "] " + username + ": ");
@@ -69,4 +71,6 @@ public class DisplayManager {
 
 
     }
+
+    public void clearChat() { controller.messageDisplayArea.getChildren().clear(); }
 }

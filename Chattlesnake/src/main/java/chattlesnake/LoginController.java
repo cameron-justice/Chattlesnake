@@ -162,7 +162,6 @@ public class LoginController {
         } catch ( Exception e ){
             e.printStackTrace();
         }
-
     }
 
     public void enterPress(KeyEvent keyEvent) {
