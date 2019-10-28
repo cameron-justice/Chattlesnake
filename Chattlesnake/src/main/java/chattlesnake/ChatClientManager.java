@@ -95,24 +95,8 @@ public class ChatClientManager {
         });
     }
 
-    public User getInfoOnUser(int user_id){
-        final User[] user = new User[1]; // Java needs this workaround because why not
-
-        socket.emit("userInfo", new Ack() {
-            @Override
-            public void call(Object... args) {
-                JSONObject jsonUser = (JSONObject) args[0];
-
-                int userID = jsonUser.getInt("user_id");
-                String name = jsonUser.getString("name");
-                LocalDate create_date = LocalDate.parse(jsonUser.getString("create_date"));
-                //TODO: User Pictures?
-
-                user[0] = new User(userID, name, create_date);
-            }
-        });
-
-        return user[0];
+    public void getInfoOnUser(int user_id){
+        socket.emit("userInfo", user_id);
     }
 
     // Transmits a Message object to the server for distribution
@@ -182,6 +166,9 @@ public class ChatClientManager {
                     // Make the message object
                     Message msg = new Message(senderId, Main.activeUser.getID(), msgBody, createDate);
 
+                    // Make sure user information is known
+                    getInfoOnUser(senderId);
+
                     // Send message for display
                     Main.I_DM.showMessage(msg);
                     Main.I_LM.log(msg);
@@ -232,6 +219,18 @@ public class ChatClientManager {
                 for(int i = 0; i < count; i++){
                     socket.emit("groupInfo", (int) groups.get(i)); // Request info for the groupId
                 }
+            }
+        }).on("userInfo", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                JSONObject jsonUser = (JSONObject) args[0];
+
+                int ID = jsonUser.getInt("user_id");
+                String name = jsonUser.getString("name");
+                LocalDate create_date = getDateFromString(jsonUser.getString("create_date"));
+                //TODO: User Pictures?
+
+                Main.I_RM.addKnownUser(new User(ID, name, create_date));
             }
         });
 
