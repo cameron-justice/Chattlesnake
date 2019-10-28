@@ -17,7 +17,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chattlesnake.MainController">
    <children>
-      <MenuBar layoutX="64.0" prefHeight="408.0" prefWidth="57.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <MenuBar layoutX="-10.0" prefHeight="408.0" prefWidth="73.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-10.0" AnchorPane.topAnchor="0.0" />
       <HBox layoutX="280.0" prefHeight="48.0" prefWidth="471.0" spacing="10.0" style="-fx-background-color: #fb8c00;" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label prefHeight="31.0" prefWidth="120.0" text="ChattleSnake" textFill="WHITE">
@@ -55,8 +55,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ListView id="profileSection" layoutX="54.0" prefHeight="408.0" prefWidth="226.0" style="-fx-background-color: #424242;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="0.0" />
-      <MenuButton layoutX="-1.0" layoutY="1.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="51.0" style="-fx-background-color: #212121;" text="Bar" textFill="#aea3a3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ListView id="profileSection" layoutX="63.0" prefHeight="408.0" prefWidth="217.0" style="-fx-background-color: #424242;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="0.0" />
+      <MenuButton layoutX="-1.0" layoutY="1.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="63.0" style="-fx-background-color: #212121;" text="Menu" textFill="#aea3a3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#fullscreenMenuItemAction" text="Fullscreen" />
           <MenuItem mnemonicParsing="false" onAction="#exitMenuItemAction" text="Exit" />
