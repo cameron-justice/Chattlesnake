@@ -43,4 +43,18 @@ public class RelationsManager {
 
     }
 
+    /**
+     * Find out if a user is already known
+     * @param user_id
+     * @return true if known, false if unknown
+     */
+    public boolean KnowUser(int user_id){
+        for (User user: knownUsers) {
+            if ( user.getID() == user_id)
+                return true;
+        }
+
+        return false;
+    }
+
 }

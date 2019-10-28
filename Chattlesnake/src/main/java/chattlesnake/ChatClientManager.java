@@ -167,7 +167,9 @@ public class ChatClientManager {
                     Message msg = new Message(senderId, Main.activeUser.getID(), msgBody, createDate);
 
                     // Make sure user information is known
-                    getInfoOnUser(senderId);
+                    if(!Main.I_RM.KnowUser(senderId)){
+                        getInfoOnUser(senderId);
+                    }
 
                     // Send message for display
                     Main.I_DM.showMessage(msg);
