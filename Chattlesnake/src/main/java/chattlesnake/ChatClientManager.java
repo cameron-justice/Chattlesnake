@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
 
 //TODO: All this stuff and more
 // Decode user and send to display
@@ -171,6 +172,7 @@ public class ChatClientManager {
                     // Make sure user information is known
                     if(!Main.I_RM.KnowUser(senderId)){
                         getInfoOnUser(senderId);
+                        holdUp(1);
                     }
 
                     // Send message for display
@@ -254,6 +256,19 @@ public class ChatClientManager {
         else {
             return LocalDateTime.now();
         }
+    }
+
+    /**
+     * Pauses the system for a specified number of seconds
+     * @param seconds
+     */
+    private void holdUp( int seconds ) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch ( Exception e ){
+            e.printStackTrace();
+        }
+
     }
 
 }
