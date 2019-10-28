@@ -59,6 +59,11 @@
             <Font name="Malayalam MN" size="12.0" />
          </font>
       </Label>
+      <Label fx:id="loginError" layoutX="455.0" layoutY="109.0" prefHeight="16.0" prefWidth="0.0" textFill="#fc4d4d">
+         <font>
+            <Font name="Malayalam MN" size="12.0" />
+         </font>
+      </Label>
       <Button fx:id="createAccountPrompt" layoutX="404.0" layoutY="238.0" mnemonicParsing="false" onAction="#createAccountPrompt" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: TRANSPARENT;" text="Create Account" textFill="#d3b136" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="238.0">
          <font>
             <Font name="Malayalam MN" size="12.0" />
