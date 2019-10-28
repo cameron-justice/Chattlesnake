@@ -21,7 +21,7 @@ public class RelationsManager {
      * @return
      */
     public String getUsername(int user_id) {
-        for (User user: knownUsers) {
+        for (User user : knownUsers) {
             if ( user.getID() == user_id)
                 return user.getName();
         }

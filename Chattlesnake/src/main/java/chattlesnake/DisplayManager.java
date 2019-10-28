@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The DisplayManager class is responsible for taking the messages/groups being
@@ -26,8 +27,16 @@ public class DisplayManager {
     }
 
     public void showMessage(Message msg) {
+        try {
+            wait();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         int author_id = msg.getAuthor_id();
         int recipient_id = msg.getRecipient_id();
+
+        System.out.println("Here: " + Main.I_RM.getUser(author_id).getName());
 
         System.out.println("From: " + author_id);
         //System.out.println("To: " + recipient_id);
@@ -60,13 +69,27 @@ public class DisplayManager {
     private String getUsername(int id) {
         if (id == Main.activeUser.getID())
             return Main.activeUser.getName();
-        else
+        else {
             return Main.I_RM.getUsername(id);
+        }
     }
 
 
     public void showGroup(Group group) {
 
+
+    }
+
+    /**
+     * Pauses the system for a specified number of seconds
+     * @param seconds
+     */
+    private void holdUp( int seconds ) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch ( Exception e ){
+            e.printStackTrace();
+        }
 
     }
 }
