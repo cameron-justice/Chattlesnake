@@ -26,6 +26,7 @@ public class LogManager {
 
         PrintWriter pw = new PrintWriter("Log.txt");
         pw.write(log.toJSONString());
+
         pw.flush();
         pw.close();
 

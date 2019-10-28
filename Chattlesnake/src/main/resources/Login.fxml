@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chattlesnake.LoginController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="400.0" fitWidth="601.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@eastern-diamondback-rattlesnake.jpg" />
          </image>
@@ -59,7 +59,7 @@
             <Font name="Malayalam MN" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="createAccountPrompt" layoutX="404.0" layoutY="238.0" mnemonicParsing="false" onAction="#createAccountPrompt" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: 0;" text="Create Account" textFill="#d3b136" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="238.0">
+      <Button fx:id="createAccountPrompt" layoutX="404.0" layoutY="238.0" mnemonicParsing="false" onAction="#createAccountPrompt" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: TRANSPARENT;" text="Create Account" textFill="#d3b136" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="238.0">
          <font>
             <Font name="Malayalam MN" size="12.0" />
          </font>
@@ -76,19 +76,31 @@
                <TextField fx:id="accountUsernameField" layoutX="223.0" layoutY="221.0" promptText="Username" AnchorPane.leftAnchor="223.0" AnchorPane.topAnchor="221.0">
                <font>
                   <Font name="Malayalam MN" size="13.0" />
-               </font></TextField>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
                <PasswordField fx:id="accountPasswordField" layoutX="223.0" layoutY="266.0" promptText="Password" AnchorPane.leftAnchor="223.0" AnchorPane.topAnchor="266.0">
                <font>
                   <Font name="Malayalam MN" size="13.0" />
-               </font></PasswordField>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></PasswordField>
                <Button fx:id="createAccount" layoutX="233.0" layoutY="322.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="29.0" prefWidth="135.0" style="-fx-border-color: black; -fx-border-radius: 2; -fx-background-color: white; -fx-background-radius: 2; -fx-background-insets: 1;" text="Create Account" AnchorPane.leftAnchor="233.0" AnchorPane.topAnchor="322.0">
                <font>
                   <Font name="Malayalam MN" size="12.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
                <TextField fx:id="emailField" layoutX="224.0" layoutY="173.0" promptText="E-Mail" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="173.0">
                <font>
                   <Font name="Malayalam MN" size="13.0" />
-               </font></TextField>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
             <Button fx:id="backButton" layoutY="1.0" mnemonicParsing="false" onAction="#backAction" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="Back" underline="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="1.0">
                <font>
                   <Font name="Malayalam MN" size="10.0" />
@@ -96,6 +108,9 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Label layoutX="190.0" layoutY="49.0" text="Create An Account">
                <font>
