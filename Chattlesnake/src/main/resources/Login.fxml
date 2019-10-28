@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../Downloads/eastern-diamondback-rattlesnake.jpg" />
+            <Image url="@eastern-diamondback-rattlesnake.jpg" />
          </image>
       </ImageView>
       <Label layoutX="355.0" layoutY="98.0" opacity="0.68" prefHeight="180.0" prefWidth="220.0" style="-fx-background-color: #000000;">
@@ -49,6 +49,11 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <Label layoutX="394.0" layoutY="230.0" prefHeight="17.0" prefWidth="143.0" text="Don't Have An Account?" textFill="#d3b136">
+         <font>
+            <Font name="Malayalam MN" size="12.0" />
+         </font>
+      </Label>
       <Button fx:id="createAccountPrompt" layoutX="404.0" layoutY="238.0" mnemonicParsing="false" onAction="#createAccountPrompt" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: 0;" text="Create Account" textFill="#d3b136" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="238.0">
          <font>
             <Font name="Malayalam MN" size="12.0" />
@@ -85,11 +90,6 @@
             </Button>
            </children>
       </AnchorPane>
-      <Label layoutX="394.0" layoutY="230.0" prefHeight="17.0" prefWidth="143.0" text="Don't Have An Account?" textFill="#d3b136">
-         <font>
-            <Font name="Malayalam MN" size="12.0" />
-         </font>
-      </Label>
    </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />
