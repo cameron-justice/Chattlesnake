@@ -30,20 +30,19 @@ public class DisplayManager {
         int author_id = msg.getAuthor_id();
         int recipient_id = msg.getRecipient_id();
 
-        System.out.println("From: " + author_id);
+        //System.out.println("From: " + author_id);
         //System.out.println("To: " + recipient_id);
-        System.out.println("To: " + Main.activeUser.getID()); // DEMO CODE
         //System.out.println("Message: " + message);
 
         // Converts the time to 12-hour format
         LocalDateTime cd = msg.getCreate_date();
-        LocalTime time = cd.toLocalTime();
-        LocalDate date = cd.toLocalDate();
+        LocalTime time = cd.toLocalTime().truncatedTo(ChronoUnit.SECONDS);
+        String stringTime = time.toString();
         System.out.println("Message sent at: " + time.toString());
 
 
         String username = getUsername(author_id);
-        Text id = new Text("[" + Integer.toString(author_id) + "] " + username + ": ");
+        Text id = new Text("[" + Integer.toString(author_id) + "] " + username + "@" + stringTime + ": ");
         //id.setStyle("-fx-font-weight: bold");
         id.setFont(Font.font(null, FontWeight.BOLD, 18));
         id.setFill(Color.ORANGERED);
