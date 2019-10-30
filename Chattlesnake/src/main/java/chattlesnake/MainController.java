@@ -3,6 +3,7 @@ package chattlesnake;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 public class MainController {
 
     @FXML
-    public FlowPane profileSection;
+    public ListView profileSection;
     @FXML
     private javafx.scene.layout.AnchorPane primaryPane;
     @FXML

@@ -1,7 +1,11 @@
 package chattlesnake;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -66,7 +70,12 @@ public class DisplayManager {
                 controller.messageDisplayArea.getChildren().addAll(id, message);
                 controller.chatScroll.setVvalue(1);
 
-                controller.profileSection.getChildren().add(cont.groupFlow);
+                ObservableList<FlowPane> items = FXCollections.observableArrayList(cont.groupFlow);
+                //controller.profileSection.setItems(items);
+                controller.profileSection.setItems(items);
+                
+                //controller.profileSection.setItems(items);
+
 
             }
         });
