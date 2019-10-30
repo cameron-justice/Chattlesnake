@@ -164,15 +164,14 @@ public class ChatClientManager {
 
                     int senderId = jsonMsg.getInt("creator");
                     String msgBody = jsonMsg.getString("msg_body");
-                    LocalDateTime createDate = getDateTimeFromString(jsonMsg.getString("create_datetime")); // TODO: Make sure this doesn't break converting string to LocalDateTime
+                    LocalDateTime createDate = getDateTimeFromString(jsonMsg.getString("create_datetime"));
 
                     // Make the message object
                     Message msg = new Message(senderId, Main.activeUser.getID(), msgBody, createDate);
 
                     // Make sure user information is known
-                    if(!Main.I_RM.KnowUser(senderId)){
+                    if(!Main.I_RM.KnowUser(senderId)) {
                         getInfoOnUser(senderId);
-                        holdUp(1);
                     }
 
                     // Send message for display
