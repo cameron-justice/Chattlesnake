@@ -1,6 +1,5 @@
 package chattlesnake;
 
-import com.sun.javafx.event.EventQueue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

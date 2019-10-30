@@ -1,12 +1,24 @@
 package chattlesnake;
 
-import java.io.FileNotFoundException;
+import org.json.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
-import org.json.simple.JSONObject;
 import java.time.LocalDateTime;
 
 public class LogManager {
-    public void log(Message mess) throws FileNotFoundException {
+
+    private FileWriter fw;
+    private PrintWriter pw;
+
+    public LogManager() throws IOException {
+        fw = new FileWriter("Log.txt", true);
+        pw = new PrintWriter(fw);
+
+    }
+
+    public void log(Message mess) {
 
         JSONObject log = new JSONObject();
         int author_id = 0;
@@ -24,11 +36,8 @@ public class LogManager {
         log.put("Message Body: ", message_body);
         log.put("Date: ", create_date);
 
-        PrintWriter pw = new PrintWriter("Log.txt");
-        pw.write(log.toJSONString());
-
+        pw.append(log.toString() + '\n');
         pw.flush();
-        pw.close();
 
     }
 }
