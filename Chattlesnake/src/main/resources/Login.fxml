@@ -23,7 +23,7 @@
             <Font name="Malayalam MN" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="exitButton" layoutX="248.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitProgram" style="-fx-background-color: transparent;" text="X" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button fx:id="exitButton" layoutX="248.0" focusTraversable="false" layoutY="1.0" mnemonicParsing="false" onAction="#exitProgram" style="-fx-background-color: transparent;" text="X" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -33,7 +33,7 @@
             <Font name="Malayalam MN" size="40.0" />
          </font>
       </Label>
-      <TextField fx:id="loginUsernameField" layoutX="394.0" layoutY="138.0" promptText="Username" AnchorPane.leftAnchor="394.0" AnchorPane.topAnchor="138.0">
+      <TextField fx:id="loginUsernameField" layoutX="394.0" layoutY="138.0" onKeyPressed="#enterPress" promptText="Username" AnchorPane.leftAnchor="394.0" AnchorPane.topAnchor="138.0">
          <font>
             <Font name="Malayalam MN" size="12.0" />
          </font></TextField>
@@ -59,7 +59,7 @@
             <Font name="Malayalam MN" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="loginError" layoutX="455.0" layoutY="109.0" prefHeight="16.0" prefWidth="0.0" textFill="#fc4d4d">
+      <Label fx:id="loginError" layoutX="455.0" layoutY="109.0" prefHeight="16.0" prefWidth="0.0" textFill="#fc4d4d" text="Login not successful. Try Again." visible="false">
          <font>
             <Font name="Malayalam MN" size="12.0" />
          </font>
@@ -78,7 +78,14 @@
                   <Image url="@eastern-diamondback-rattlesnake.jpg" />
                </image>
             </ImageView>
-               <TextField fx:id="accountUsernameField" layoutX="223.0" layoutY="221.0" promptText="Username" AnchorPane.leftAnchor="223.0" AnchorPane.topAnchor="221.0">
+              <TextField fx:id="emailField" layoutX="224.0" layoutY="173.0" promptText="E-Mail" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="173.0">
+                 <font>
+                    <Font name="Malayalam MN" size="13.0" />
+                 </font>
+                 <cursor>
+                    <Cursor fx:constant="TEXT" />
+                 </cursor></TextField>
+              <TextField fx:id="accountUsernameField" layoutX="223.0" layoutY="221.0" promptText="Username" AnchorPane.leftAnchor="223.0" AnchorPane.topAnchor="221.0">
                <font>
                   <Font name="Malayalam MN" size="13.0" />
                </font>
@@ -99,14 +106,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-               <TextField fx:id="emailField" layoutX="224.0" layoutY="173.0" promptText="E-Mail" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="173.0">
-               <font>
-                  <Font name="Malayalam MN" size="13.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor></TextField>
-            <Button fx:id="backButton" layoutY="1.0" mnemonicParsing="false" onAction="#backAction" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="Back" underline="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="1.0">
+            <Button fx:id="backButton" focusTraversable="false" layoutY="1.0" mnemonicParsing="false" onAction="#backAction" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="Back" underline="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="1.0">
                <font>
                   <Font name="Malayalam MN" size="10.0" />
                </font>

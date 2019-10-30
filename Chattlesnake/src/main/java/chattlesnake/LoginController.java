@@ -122,6 +122,7 @@ public class LoginController {
     @FXML
     private void createAccountPrompt(ActionEvent event) {
         accountPane.setVisible(true);
+        emailField.requestFocus();
         accountUsernameField.setText( loginUsernameField.getText().trim() );
         accountPasswordField.setText( loginPasswordField.getText().trim() );
     }
