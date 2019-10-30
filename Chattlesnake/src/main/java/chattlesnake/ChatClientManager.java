@@ -29,6 +29,8 @@ public class ChatClientManager {
 
     private Socket socket;
     private LoginController controller;
+    private Message savedMessage;
+    private boolean waitingForUserInfo = false;
 
     // Constructor
     ChatClientManager(LoginController controller) throws URISyntaxException {
@@ -160,8 +162,6 @@ public class ChatClientManager {
             public void call(Object... args) {
                 JSONObject jsonMsg = (JSONObject) args[0];
                 try {
-                    System.out.println("Working");
-
                     int senderId = jsonMsg.getInt("creator");
                     String msgBody = jsonMsg.getString("msg_body");
                     LocalDateTime createDate = getDateTimeFromString(jsonMsg.getString("create_datetime"));
@@ -172,11 +172,14 @@ public class ChatClientManager {
                     // Make sure user information is known
                     if(!Main.I_RM.KnowUser(senderId)) {
                         getInfoOnUser(senderId);
+                        savedMessage = msg;
+                        waitingForUserInfo = true;
+                        return;
+                    } else {
+                        // Send message for display and logging
+                        Main.I_DM.showMessage(msg);
+                        Main.I_LM.log(msg);
                     }
-
-                    // Send message for display
-                    Main.I_DM.showMessage(msg);
-                    Main.I_LM.log(msg);
 
                 } catch (JSONException | FileNotFoundException e) {
                     e.printStackTrace();
@@ -236,6 +239,17 @@ public class ChatClientManager {
                 //TODO: User Pictures?
 
                 Main.I_RM.addKnownUser(new User(ID, name, create_date));
+
+                if(waitingForUserInfo){
+                    waitingForUserInfo = false;
+                    // Send message for display
+                    Main.I_DM.showMessage(savedMessage);
+                    try {
+                        Main.I_LM.log(savedMessage);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
 

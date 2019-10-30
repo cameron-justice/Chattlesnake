@@ -27,12 +27,6 @@ public class DisplayManager {
     }
 
     public void showMessage(Message msg) {
-        try {
-            wait();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
         int author_id = msg.getAuthor_id();
         int recipient_id = msg.getRecipient_id();
 
