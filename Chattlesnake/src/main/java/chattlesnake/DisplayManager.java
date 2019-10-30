@@ -1,10 +1,12 @@
 package chattlesnake;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -57,8 +59,15 @@ public class DisplayManager {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("GroupTemplate.fxml"));
+                GroupTemplateController cont = new GroupTemplateController(username, LocalDateTime.now().toString());
+                loader.setController(cont);
+
                 controller.messageDisplayArea.getChildren().addAll(id, message);
                 controller.chatScroll.setVvalue(1);
+
+                controller.profileSection.getChildren().add(cont.groupFlow);
+
             }
         });
     }

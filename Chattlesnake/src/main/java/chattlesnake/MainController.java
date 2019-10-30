@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
@@ -21,7 +22,8 @@ import java.time.LocalDateTime;
 
 public class MainController {
 
-
+    @FXML
+    public FlowPane profileSection;
     @FXML
     private javafx.scene.layout.AnchorPane primaryPane;
     @FXML

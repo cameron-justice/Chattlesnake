@@ -20,6 +20,8 @@ public class Main extends Application {
     static public LogManager I_LM = new LogManager();
     static public RelationsManager I_RM = new RelationsManager();
 
+    static public Scene scene;
+
     static public User activeUser;
     static public FXMLLoader loader = new FXMLLoader();
     static private Parent root;
@@ -48,6 +50,7 @@ public class Main extends Application {
         Stage mainStage = new Stage();
         mainStage.setTitle("ChattleSnake");
         Scene mainScene = new Scene( root, 1280, 720 );
+        scene = mainScene;
 
         mainStage.setScene(mainScene);
         mainStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
