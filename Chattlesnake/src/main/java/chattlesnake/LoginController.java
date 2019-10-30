@@ -1,6 +1,5 @@
 package chattlesnake;
 
-import com.sun.javafx.event.EventQueue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -122,6 +121,7 @@ public class LoginController {
     @FXML
     private void createAccountPrompt(ActionEvent event) {
         accountPane.setVisible(true);
+        emailField.requestFocus();
         accountUsernameField.setText( loginUsernameField.getText().trim() );
         accountPasswordField.setText( loginPasswordField.getText().trim() );
     }

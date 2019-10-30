@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -121,11 +120,7 @@ public class ChatClientManager {
 
         socket.emit("chatMessage", jsonMsg);
 
-        try{
-            Main.I_LM.log(msg);
-        } catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
+        Main.I_LM.log(msg);
     }
 
     /**
@@ -181,7 +176,7 @@ public class ChatClientManager {
                         Main.I_LM.log(msg);
                     }
 
-                } catch (JSONException | FileNotFoundException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -244,11 +239,7 @@ public class ChatClientManager {
                     waitingForUserInfo = false;
                     // Send message for display
                     Main.I_DM.showMessage(savedMessage);
-                    try {
-                        Main.I_LM.log(savedMessage);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    Main.I_LM.log(savedMessage);
                 }
             }
         });

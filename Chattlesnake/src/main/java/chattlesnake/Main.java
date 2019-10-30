@@ -2,22 +2,20 @@ package chattlesnake;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.time.LocalDateTime;
+import java.io.IOException;
 
 public class Main extends Application {
 
     // Singleton pattern for managers
     static public ChatClientManager I_CCM;
     static public DisplayManager I_DM;
-    static public LogManager I_LM = new LogManager();
+    static public LogManager I_LM;
     static public RelationsManager I_RM = new RelationsManager();
 
     static public Scene scene;
@@ -40,6 +38,12 @@ public class Main extends Application {
 
         // Manager Singletons
         I_CCM = new ChatClientManager(loader.getController());
+
+        try {
+            I_LM = new LogManager();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void openChat() throws Exception {

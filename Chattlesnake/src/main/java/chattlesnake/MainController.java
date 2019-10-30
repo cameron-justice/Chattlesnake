@@ -1,11 +1,8 @@
 package chattlesnake;
 
-import chattlesnake.ChatClientManager;
-import chattlesnake.DisplayManager;
-import chattlesnake.Message;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
@@ -13,11 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import javafx.scene.control.*;
-import javafx.event.ActionEvent;
 
-import java.awt.*;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 
 public class MainController {
