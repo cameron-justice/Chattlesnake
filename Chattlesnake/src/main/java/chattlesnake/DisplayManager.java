@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
@@ -72,8 +73,9 @@ public class DisplayManager {
 
                 ObservableList<FlowPane> items = FXCollections.observableArrayList(cont.groupFlow);
                 //controller.profileSection.setItems(items);
-                controller.profileSection.setItems(items);
-                
+                //controller.profileSection.setItems(items);
+                //controller.profileSection.setCellFactory(ListView<FlowPane>, ListCell<FlowPane>);
+
                 //controller.profileSection.setItems(items);
 
 
