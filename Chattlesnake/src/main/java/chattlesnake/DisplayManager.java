@@ -64,21 +64,16 @@ public class DisplayManager {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("GroupTemplate.fxml"));
-                GroupTemplateController cont = new GroupTemplateController(username, LocalDateTime.now().toString());
-                loader.setController(cont);
+                //FXMLLoader loader = new FXMLLoader(getClass().getResource("GroupTemplate.fxml"));
+                //GroupTemplateController cont = new GroupTemplateController(username, LocalDateTime.now().toString());
 
                 controller.messageDisplayArea.getChildren().addAll(id, message);
                 controller.chatScroll.setVvalue(1);
 
-                ObservableList<FlowPane> items = FXCollections.observableArrayList(cont.groupFlow);
-                //controller.profileSection.setItems(items);
+                //ObservableList<FlowPane> items = FXCollections.observableArrayList(cont.groupFlow);
+
                 //controller.profileSection.setItems(items);
                 //controller.profileSection.setCellFactory(ListView<FlowPane>, ListCell<FlowPane>);
-
-                //controller.profileSection.setItems(items);
-
-
             }
         });
     }

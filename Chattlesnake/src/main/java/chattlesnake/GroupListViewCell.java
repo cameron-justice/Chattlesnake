@@ -32,7 +32,7 @@ public class GroupListViewCell extends ListCell<Group> {
         } else {
             if (mLLoader == null) {
                 System.out.println("making it work");
-                //mLLoader = new FXMLLoader(getClass().getResource("GroupTemplate.fxml"));
+                mLLoader = new FXMLLoader(Main.class.getClassLoader().getResource("GroupTemplate.fxml"));
                 //mLLoader.setController(this);
 
                 /*try {
